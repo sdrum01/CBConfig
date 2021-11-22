@@ -1,0 +1,226 @@
+29.06.20-11:01:35;	TCP connection Disconnected
+29.06.20-11:02:00;	Connected Port 5000 to remote host
+29.06.20-11:02:02;	TCP connection Disconnected
+29.06.20-11:02:02;	Connection lost: Port5000
+29.06.20-11:02:05;	Connected Port 5000 to remote host
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:02:09;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:02:10;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:02:10;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:02:10;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:02:10;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:02:10;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:02:10;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:02:21;	TCP connection Disconnected
+29.06.20-11:02:21;	Connection lost: Port5000
+29.06.20-11:18:41;	Connected Port 5000 to remote host
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:18:45;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:19:50;	OFFLINE; Adr 1;
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:19:52;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:20:58;	Connection lost: Port5000
+29.06.20-11:24:11;	Connected Port 5000 to remote host
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:24:15;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:24:57;	Connected Port 5000 to remote host
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:25:00;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:25:51;	OFFLINE; Adr 1;
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:25:52;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:26:12;	Connected Port 5000 to remote host
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:26:14;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:26:17;	Connection lost: Port5000
+29.06.20-11:26:38;	Connected Port 5000 to remote host
+29.06.20-11:27:50;	OFFLINE; Adr 1;
+29.06.20-11:27:51;	OFFLINE; Adr 0;
+29.06.20-11:27:57;	TCP connection Disconnected
+29.06.20-11:27:57;	Connection lost: Port5000
+29.06.20-11:27:58;	Connected Port 5000 to remote host
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:28:01;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:28:02;	Connection lost: Port5000
+29.06.20-11:28:18;	Connected Port 5000 to remote host
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:28:19;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:28:36;	Connection lost: Port5000
+29.06.20-11:28:48;	Connected Port 5000 to remote host
+29.06.20-11:28:56;	Connection lost: Port5000
+29.06.20-11:29:19;	Connected Port 5000 to remote host
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 0
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 1
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 10
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 11
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 20
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 21
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 30
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 32
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 40
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 42
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 50
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 52
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 60
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 62
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 70
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 72
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 80
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 82
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 90
+29.06.20-11:29:21;	state changed OPEN => CLOSED; Adr 0; Box 92
+29.06.20-11:29:55;	Connection lost: Port5000

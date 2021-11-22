@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <Units Count="11">
+      <Unit0>
+        <Filename Value="cb_config.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <CursorPos X="46" Y="13"/>
+        <UsageCount Value="203"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="1550"/>
+        <CursorPos X="45" Y="1552"/>
+        <FoldState Value=" T3-F0{O~"/>
+        <UsageCount Value="103"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="unit_bs.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Unit_BS"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="92"/>
+        <CursorPos X="51" Y="124"/>
+        <UsageCount Value="200"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="..\..\..\Download\Development\lazarus\packages\lnet\examples\visual\tcpudp\main.pas"/>
+        <ComponentName Value="FormMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UsageCount Value="20"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="F:\Download\Development\lazarus\packages\lnet\examples\visual\tcpudp\main.pas"/>
+        <ComponentName Value="FormMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <TopLine Value="29"/>
+        <CursorPos X="42" Y="33"/>
+        <UsageCount Value="203"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="F:\Download\Development\lazarus\packages\lnet\lib\lcommon.pp"/>
+        <UnitName Value="lCommon"/>
+        <TopLine Value="339"/>
+        <CursorPos X="43" Y="358"/>
+        <UsageCount Value="61"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="F:\Download\Development\lazarus\packages\lnet\lib\lnetssl.pp"/>
+        <UnitName Value="lNetSSL"/>
+        <TopLine Value="195"/>
+        <CursorPos X="24" Y="214"/>
+        <UsageCount Value="61"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="F:\Download\Development\lazarus\packages\lnet\lib\lwebserver.pp"/>
+        <TopLine Value="1113"/>
+        <CursorPos X="4" Y="1123"/>
+        <UsageCount Value="61"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="seriell.pas"/>
+        <TopLine Value="3"/>
+        <CursorPos X="47" Y="20"/>
+        <UsageCount Value="10"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="D:\Development\lazarus\lcl\interfaces\win32\win32int.pp"/>
+        <UnitName Value="Win32Int"/>
+        <CursorPos X="26" Y="27"/>
+        <UsageCount Value="26"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\components\lnet\lib\lcommon.pp"/>
+        <UnitName Value="lCommon"/>
+        <TopLine Value="356"/>
+        <CursorPos X="4" Y="358"/>
+        <UsageCount Value="26"/>
+      </Unit10>
+    </Units>
+    <JumpHistory Count="13" HistoryIndex="12">
+      <Position1>
+        <Filename Value="main.pas"/>
+        <Caret Line="321" Column="53" TopLine="311"/>
+      </Position1>
+      <Position2>
+        <Filename Value="main.pas"/>
+        <Caret Line="1140" Column="2" TopLine="1137"/>
+      </Position2>
+      <Position3>
+        <Filename Value="main.pas"/>
+        <Caret Line="1555" Column="31" TopLine="1546"/>
+      </Position3>
+      <Position4>
+        <Filename Value="main.pas"/>
+        <Caret Line="134" Column="57" TopLine="116"/>
+      </Position4>
+      <Position5>
+        <Filename Value="main.pas"/>
+        <Caret Line="133" Column="25" TopLine="133"/>
+      </Position5>
+      <Position6>
+        <Filename Value="main.pas"/>
+        <Caret Line="1148" Column="19" TopLine="1137"/>
+      </Position6>
+      <Position7>
+        <Filename Value="main.pas"/>
+        <Caret Line="1147" Column="19" TopLine="1136"/>
+      </Position7>
+      <Position8>
+        <Filename Value="main.pas"/>
+        <Caret Line="1573" Column="3" TopLine="1546"/>
+      </Position8>
+      <Position9>
+        <Filename Value="main.pas"/>
+        <Caret Line="1574" Column="3" TopLine="1547"/>
+      </Position9>
+      <Position10>
+        <Filename Value="main.pas"/>
+        <Caret Line="1581" Column="3" TopLine="1554"/>
+      </Position10>
+      <Position11>
+        <Filename Value="main.pas"/>
+        <Caret Line="656" Column="46" TopLine="654"/>
+      </Position11>
+      <Position12>
+        <Filename Value="main.pas"/>
+        <Caret Line="1552" Column="3" TopLine="1550"/>
+      </Position12>
+      <Position13>
+        <Filename Value="main.pas"/>
+        <Caret Line="1587" Column="45" TopLine="1560"/>
+      </Position13>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode="default"/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <Watches Count="1">
+      <Item1>
+        <Expression Value="os"/>
+      </Item1>
+    </Watches>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,1114 @@
+object FormMain: TFormMain
+  Left = 494
+  Height = 803
+  Top = 121
+  Width = 823
+  ActiveControl = EditPort
+  BorderStyle = bsSingle
+  Caption = 'cb config tool'
+  ClientHeight = 783
+  ClientWidth = 823
+  Icon.Data = {
+    BE0800000000010001002020000000000000A808000016000000280000002000
+    0000400000000100080000000000800400000000000000000000000000000000
+    000000000000FFFFFF0025C4FF006E6C6C00B5B5B5007FDCFE0046464600C0EA
+    FB009191910083AFC000D3D2D20094C7DB00E9E9E90047CCFE005B5959007F7F
+    7F00A3A3A3009CE2FD0062D4FF00D6F3FD00C6C6C60083D1EE00F4F4F400DFDE
+    DE0050505000ABE8FE0088888800ACACAC008EDEFB0062626200BEBDBD009A98
+    980078777700A9B5B900CCCCCC00E9EFF100C9EEFC00FAFAFA0073727200E4E4
+    E4009E9E9E00D9DADA005754540069686800DCF2F900545859004A4A4A00F0F0
+    F00084848400B9B9B900B1B1B100A7A7A700959595007B7B7B00D6D6D600C1C1
+    C1005D5D5D008F8D8D00A6E5FD004F4C4C00F7F7F70065656500EDEDED00D1F2
+    FD008B8B8B00E1E1E100CAC9C9009C9B9B008381810053535300605F5F00DCDC
+    DC00D0D0D000F6F9FA00FDFDFD00F2F2F2006B6A6A00EBEBEB00E7E7E7008686
+    8600BBBBBB00A5A5A500A9A9A900AFAFAF0058585800979797004C4C4C004E4E
+    4E00565656005C5B5B006F6E6E0074747400D5D4D4007A79790053515100C8C8
+    C800A09F9F0027C5FF006C6C6C00818181004747470049494900FEFEFE00FCFC
+    FC004D4D4D00FBFBFB004F4F4F00F9F9F90052505000F8F8F80052525200F6F6
+    F60054545400F5F5F500F3F3F300F1F1F1005E5C5C00EFEFEF00EEEEEE00ECEC
+    EC00EAEAEA0066666600E8E8E8006A696900E5E5E500E3E3E300E2E2E200E0E0
+    E000DDDDDD00DBDBDB00D7D7D7008080800084828200898989008E8E8E009090
+    9000BDBCBC00BABABA00B8B8B8009D9D9D00B2B2B200B0B0B000A4A4A400AEAE
+    AE00A6A6A600A8A8A800AAAAAA0057555500DBF1F900737373008DDDFB00DFDF
+    DF007A7878007A7A7A00D5D5D50088878700CACACA0097969600B5B4B4004F4E
+    4E005B5B5B005F5F5F00EAE9E900696969006B696900DADADA00BDBDBD00B2B1
+    B1009F9F9F000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000560000000000000000000000000000
+    0000000000000000000000000000000070343D060000000000003B5A84000000
+    00000000000000000000000000000054521B516264000000005E031F555D0000
+    0000000000000000000000000000A1328C401A519565009F5E2B9B43392A0000
+    00000000000000000000000000A38A5390850F4F51466C6C0E7B982093000000
+    0000000000000000000000645B501B909028400F996C6C6C6C59745E00000000
+    000000000000000000002E63A69290908F3E4786266C4C9D9DA46C0000000000
+    0000000000000000005608A6919090A6732F767F87448D229E60000000000000
+    0000000000000000188B503390519C4B732F767E8C0A69660188830000000000
+    0000000000000058528A909090A5724B732F5C3773674A66011E1D0000000000
+    000000000000388C049090917A71724B76427E2569676776A710680000000000
+    000000000079318C909053736F71724E9A716D6B256F36478E33680000000000
+    000000006831329051893C3C6F7197776F3C6D6B7F170C7A7814570000000000
+    0000000068A691905F256D3C4B7C1671716FA280774D4D765F95000000000000
+    000000006837338169256D3C762F721675413E3E762F48356800000000000000
+    000000006A140C1324256D3C6F4B7727752F7573823057000000000000000000
+    00000000572919023A496D3C6F71724B4B724786570000000000000000000000
+    00000000002D153F1161943C6F7172717D551800000000000000000000000000
+    000000000000180B1207961C6F3C0CA845000000000000000000000000000000
+    000000000000005721050D2C7691540000000000000000000000000000000000
+    000000000000000000092332A000000000000000000000000000000000000000
+    000000000000000000006E000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE
+    FFFFFFFC3F1FFFF81E0FFFF0080FFFE0001FFF80003FFF00007FFE0000FFFC00
+    007FF800007FF000007FE000007FC000007FC00000FFC00001FFC00007FFC000
+    1FFFE0007FFFF001FFFFF807FFFFFE1FFFFFFF7FFFFFFFFFFFFFFFFFFFFFFFFF
+    FFFF
+  }
+  Menu = MainMenu1
+  OnClose = FormClose
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '1.0.2.0'
+  object LabelPort: TLabel
+    Left = 320
+    Height = 16
+    Top = 0
+    Width = 95
+    Caption = 'Port BS500 / GPIO'
+    ParentColor = False
+  end
+  object LabelHostName: TLabel
+    Left = 227
+    Height = 16
+    Top = 0
+    Width = 85
+    Caption = 'IP Host address:'
+    ParentColor = False
+  end
+  object ButtonConnect: TButton
+    Left = 528
+    Height = 25
+    Top = 15
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Connect'
+    OnClick = ConnectButtonClick
+    TabOrder = 0
+  end
+  object ButtonDiconnect: TButton
+    Left = 608
+    Height = 25
+    Top = 16
+    Width = 80
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Disconnect'
+    OnClick = DiconnectButtonClick
+    TabOrder = 1
+  end
+  object EditPort: TEdit
+    Left = 320
+    Height = 23
+    Top = 15
+    Width = 73
+    TabOrder = 2
+    Text = '5000'
+  end
+  object EditIP: TEdit
+    Left = 224
+    Height = 23
+    Top = 15
+    Width = 88
+    TabOrder = 3
+    Text = '192.168.1.126'
+  end
+  object b_close: TButton
+    Left = 760
+    Height = 25
+    Top = 16
+    Width = 51
+    Caption = 'close'
+    OnClick = b_closeClick
+    TabOrder = 4
+  end
+  object Panel_terminal: TPanel
+    Left = 8
+    Height = 224
+    Top = 552
+    Width = 808
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ClientHeight = 224
+    ClientWidth = 808
+    TabOrder = 5
+    Visible = False
+    object EditSend: TEdit
+      Left = 8
+      Height = 23
+      Top = 10
+      Width = 289
+      OnKeyPress = SendEditKeyPress
+      TabOrder = 0
+    end
+    object MemoText: TMemo
+      Left = 8
+      Height = 168
+      Top = 40
+      Width = 792
+      OnChange = MemoTextChange
+      ReadOnly = True
+      ScrollBars = ssAutoVertical
+      TabOrder = 1
+      WordWrap = False
+    end
+    object ButtonSend: TButton
+      Left = 304
+      Height = 25
+      Top = 9
+      Width = 67
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Send'
+      OnClick = SendButtonClick
+      TabOrder = 2
+    end
+    object Button_Poll: TButton
+      Left = 729
+      Height = 25
+      Top = 9
+      Width = 72
+      Caption = 'log pause'
+      OnClick = Button_PollClick
+      TabOrder = 3
+    end
+    object B_save_log: TButton
+      Left = 664
+      Height = 25
+      Top = 9
+      Width = 64
+      Caption = 'save'
+      OnClick = B_save_logClick
+      TabOrder = 4
+    end
+  end
+  object Button_terminal: TButton
+    Left = 696
+    Height = 25
+    Top = 16
+    Width = 59
+    Caption = 'terminal'
+    OnClick = Button_terminalClick
+    TabOrder = 6
+    Visible = False
+  end
+  object PageControl1: TPageControl
+    Left = 8
+    Height = 344
+    Top = 40
+    Width = 808
+    ActivePage = Tab_Boxes
+    ParentFont = False
+    TabIndex = 1
+    TabOrder = 7
+    OnChange = PageControl1Change
+    object Tab_EEProm: TTabSheet
+      Caption = 'ComBoard'
+      ClientHeight = 316
+      ClientWidth = 800
+      OnContextPopup = Tab_EEPromContextPopup
+      object GroupBox_EE: TGroupBox
+        Left = 4
+        Height = 136
+        Top = 64
+        Width = 768
+        Caption = 'EEProm Settings'
+        ClientHeight = 118
+        ClientWidth = 764
+        Color = clForm
+        ParentColor = False
+        TabOrder = 0
+        object b_set_ip: TButton
+          Left = 475
+          Height = 25
+          Top = 72
+          Width = 75
+          Caption = 'write Values'
+          OnClick = b_set_ipClick
+          TabOrder = 0
+        end
+        object Edit_IP_4: TEdit
+          Left = 198
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 1
+        end
+        object Edit_IP_3: TEdit
+          Left = 158
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 2
+        end
+        object Edit_IP_2: TEdit
+          Left = 118
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 3
+        end
+        object Edit_IP_1: TEdit
+          Left = 78
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 4
+        end
+        object b_get_ip: TButton
+          Left = 319
+          Height = 25
+          Top = 72
+          Width = 75
+          Caption = 'read Values'
+          OnClick = b_get_ipClick
+          TabOrder = 5
+        end
+        object Label1: TLabel
+          Left = 6
+          Height = 16
+          Top = 8
+          Width = 56
+          Caption = 'IP-address'
+          ParentColor = False
+        end
+        object Edit_IP_port0: TEdit
+          Left = 79
+          Height = 23
+          Top = 72
+          Width = 55
+          TabOrder = 6
+        end
+        object Label2: TLabel
+          Left = 38
+          Height = 16
+          Top = 72
+          Width = 29
+          Caption = 'Port0'
+          ParentColor = False
+        end
+        object Edit_IP_mac1: TEdit
+          Left = 318
+          Height = 23
+          Top = 40
+          Width = 32
+          TabOrder = 7
+        end
+        object Edit_IP_mac2: TEdit
+          Left = 358
+          Height = 23
+          Top = 40
+          Width = 32
+          TabOrder = 8
+        end
+        object Edit_IP_mac3: TEdit
+          Left = 398
+          Height = 23
+          Top = 40
+          Width = 32
+          TabOrder = 9
+        end
+        object Edit_IP_mac4: TEdit
+          Left = 438
+          Height = 23
+          Top = 40
+          Width = 32
+          Color = clYellow
+          TabOrder = 10
+        end
+        object Edit_IP_mac5: TEdit
+          Left = 478
+          Height = 23
+          Top = 40
+          Width = 32
+          Color = clYellow
+          TabOrder = 11
+        end
+        object Label3: TLabel
+          Left = 278
+          Height = 16
+          Top = 40
+          Width = 28
+          Caption = 'MAC'
+          ParentColor = False
+        end
+        object Edit_IP_port1: TEdit
+          Left = 198
+          Height = 23
+          Top = 72
+          Width = 56
+          TabOrder = 12
+        end
+        object Label4: TLabel
+          Left = 161
+          Height = 16
+          Top = 72
+          Width = 29
+          Caption = 'Port1'
+          ParentColor = False
+        end
+        object Edit_IP_gw1: TEdit
+          Left = 78
+          Height = 23
+          Top = 40
+          Width = 32
+          TabOrder = 13
+        end
+        object Edit_IP_gw2: TEdit
+          Left = 118
+          Height = 23
+          Top = 40
+          Width = 32
+          TabOrder = 14
+        end
+        object Edit_IP_gw3: TEdit
+          Left = 158
+          Height = 23
+          Top = 40
+          Width = 32
+          TabOrder = 15
+        end
+        object Edit_IP_gw4: TEdit
+          Left = 198
+          Height = 23
+          Top = 40
+          Width = 32
+          TabOrder = 16
+        end
+        object Label5: TLabel
+          Left = 6
+          Height = 16
+          Top = 40
+          Width = 46
+          Caption = 'Gateway'
+          ParentColor = False
+        end
+        object Label6: TLabel
+          Left = 246
+          Height = 16
+          Top = 8
+          Width = 69
+          Caption = 'Subnet mask'
+          ParentColor = False
+        end
+        object Edit_IP_sn1: TEdit
+          Left = 319
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 17
+        end
+        object Edit_IP_sn2: TEdit
+          Left = 359
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 18
+        end
+        object Edit_IP_sn3: TEdit
+          Left = 399
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 19
+        end
+        object Edit_IP_sn4: TEdit
+          Left = 439
+          Height = 23
+          Top = 8
+          Width = 32
+          TabOrder = 20
+        end
+        object Edit_IP_mac6: TEdit
+          Left = 518
+          Height = 23
+          Top = 40
+          Width = 32
+          Color = clYellow
+          TabOrder = 21
+        end
+        object b_set_default: TButton
+          Left = 399
+          Height = 25
+          Top = 72
+          Width = 72
+          Caption = 'set default'
+          OnClick = b_set_defaultClick
+          TabOrder = 22
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 12
+        Height = 88
+        Top = 200
+        Width = 768
+        Caption = 'GPIO'
+        ClientHeight = 70
+        ClientWidth = 764
+        TabOrder = 1
+        object chk_out1: TCheckBox
+          Left = 66
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 0
+        end
+        object chk_out2: TCheckBox
+          Left = 90
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 1
+        end
+        object chk_out3: TCheckBox
+          Left = 114
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 2
+        end
+        object chk_out4: TCheckBox
+          Left = 138
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 3
+        end
+        object chk_out5: TCheckBox
+          Left = 162
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 4
+        end
+        object chk_out6: TCheckBox
+          Left = 186
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 5
+        end
+        object chk_out7: TCheckBox
+          Left = 210
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 6
+        end
+        object chk_out8: TCheckBox
+          Left = 234
+          Height = 19
+          Top = 8
+          Width = 20
+          OnChange = chk_out1Change
+          TabOrder = 7
+        end
+        object Label7: TLabel
+          Left = 6
+          Height = 16
+          Top = 8
+          Width = 39
+          Caption = 'Output'
+          ParentColor = False
+        end
+        object Label10: TLabel
+          Left = 6
+          Height = 16
+          Top = 36
+          Width = 34
+          Caption = 'Inputs'
+          ParentColor = False
+        end
+        object chk_in1: TCheckBox
+          Left = 66
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 8
+        end
+        object chk_in2: TCheckBox
+          Left = 90
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 9
+        end
+        object chk_in3: TCheckBox
+          Left = 114
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 10
+        end
+        object chk_in4: TCheckBox
+          Left = 138
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 11
+        end
+        object chk_in5: TCheckBox
+          Left = 162
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 12
+        end
+        object chk_in6: TCheckBox
+          Left = 186
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 13
+        end
+        object chk_in7: TCheckBox
+          Left = 210
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 14
+        end
+        object chk_in8: TCheckBox
+          Left = 234
+          Height = 19
+          Top = 36
+          Width = 20
+          Enabled = False
+          TabOrder = 15
+        end
+      end
+      object Edit_version: TEdit
+        Left = 20
+        Height = 23
+        Top = 24
+        Width = 80
+        TabOrder = 2
+      end
+      object Label11: TLabel
+        Left = 20
+        Height = 16
+        Top = 8
+        Width = 73
+        Caption = 'Board version'
+        ParentColor = False
+      end
+      object b_webconfig: TButton
+        Left = 116
+        Height = 25
+        Top = 22
+        Width = 75
+        Caption = 'Web config'
+        Enabled = False
+        OnClick = b_webconfigClick
+        TabOrder = 3
+      end
+    end
+    object Tab_Boxes: TTabSheet
+      Caption = 'Box control BS500'
+      ClientHeight = 316
+      ClientWidth = 800
+      object ProgressBar1: TProgressBar
+        Left = 684
+        Height = 12
+        Top = 16
+        Width = 104
+        Max = 20
+        Step = 1
+        TabOrder = 6
+      end
+      object Label8: TLabel
+        Left = 4
+        Height = 16
+        Top = 15
+        Width = 20
+        Caption = 'Adr'
+        ParentColor = False
+      end
+      object Label9: TLabel
+        Left = 4
+        Height = 16
+        Top = 39
+        Width = 42
+        Caption = 'Box No.'
+        ParentColor = False
+      end
+      object Edit_box: TEdit
+        Left = 44
+        Height = 23
+        Top = 33
+        Width = 44
+        OnChange = Edit_boxChange
+        TabOrder = 0
+        Text = '0'
+      end
+      object Button_lock: TButton
+        Left = 172
+        Height = 24
+        Top = 32
+        Width = 75
+        Caption = 'lock'
+        OnClick = Button_lockClick
+        TabOrder = 1
+      end
+      object box1: TButton
+        Left = 92
+        Height = 25
+        Top = 31
+        Width = 75
+        Caption = 'release'
+        OnClick = box1Click
+        TabOrder = 2
+      end
+      object StringGrid1: TStringGrid
+        Left = 4
+        Height = 264
+        Top = 64
+        Width = 792
+        AutoEdit = False
+        BorderStyle = bsNone
+        Color = 15461355
+        ColCount = 25
+        DefaultColWidth = 30
+        DefaultRowHeight = 12
+        ExtendedSelect = False
+        FixedCols = 0
+        FixedRows = 0
+        Font.Height = -9
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goSmoothScroll]
+        ParentFont = False
+        ParentShowHint = False
+        RowCount = 20
+        ShowHint = True
+        TabOrder = 3
+        TitleFont.Height = -9
+        UseXORFeatures = True
+        OnClick = StringGrid1Click
+        OnDblClick = box1Click
+        OnSelectCell = StringGrid1SelectCell
+      end
+      object l_sendcount: TLabel
+        Left = 780
+        Height = 16
+        Top = 0
+        Width = 7
+        Caption = '0'
+        ParentColor = False
+      end
+      object Panel_bsNoAnswer: TPanel
+        Left = 684
+        Height = 16
+        Top = 28
+        Width = 103
+        Color = clSilver
+        Font.Color = clBlack
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 4
+        OnClick = Panel_bsNoAnswerClick
+      end
+      object TB_sequence: TToggleBox
+        Left = 252
+        Height = 23
+        Top = 32
+        Width = 90
+        Caption = 'Sequence Start'
+        OnChange = TB_sequenceChange
+        TabOrder = 5
+      end
+      object Label12: TLabel
+        Left = 684
+        Height = 16
+        Top = 0
+        Width = 49
+        Caption = 'send trial'
+        ParentColor = False
+      end
+      object Panel1: TPanel
+        Left = 764
+        Height = 16
+        Top = 94
+        Width = 32
+        BevelOuter = bvNone
+        BorderStyle = bsSingle
+        Caption = 'open'
+        Color = clWhite
+        Font.Height = -9
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 7
+      end
+      object Panel2: TPanel
+        Left = 764
+        Height = 16
+        Top = 79
+        Width = 32
+        BevelOuter = bvNone
+        BorderStyle = bsSingle
+        Caption = 'close'
+        Color = clYellow
+        Font.Height = -9
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 8
+      end
+      object Panel3: TPanel
+        Left = 764
+        Height = 16
+        Top = 64
+        Width = 32
+        BevelOuter = bvNone
+        BorderStyle = bsSingle
+        Caption = 'undef'
+        Color = 15395562
+        Font.Height = -9
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 9
+      end
+      object Panel4: TPanel
+        Left = 764
+        Height = 16
+        Top = 108
+        Width = 32
+        BevelOuter = bvNone
+        BorderStyle = bsSingle
+        Caption = 'active'
+        Color = 4227327
+        Font.Height = -9
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 10
+      end
+      object Label13: TLabel
+        Left = 759
+        Height = 16
+        Top = 48
+        Width = 37
+        Caption = 'legend'
+        ParentColor = False
+      end
+      object rg_BsAdr: TRadioGroup
+        Left = 44
+        Height = 38
+        Top = -6
+        Width = 632
+        AutoFill = True
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 16
+        ClientHeight = 20
+        ClientWidth = 628
+        Columns = 16
+        ItemIndex = 0
+        Items.Strings = (
+          '1'
+          '2'
+          '3'
+          '4'
+          '5'
+          '6'
+          '7'
+          '8'
+          '9'
+          '10'
+          '11'
+          '12'
+          '13'
+          '14'
+          '15'
+          '16'
+        )
+        OnClick = rg_BsAdrClick
+        TabOrder = 11
+      end
+      object TB_perm_rel: TToggleBox
+        Left = 348
+        Height = 23
+        Top = 33
+        Width = 114
+        Caption = 'permanent release'
+        TabOrder = 12
+      end
+      object l_errorcount: TLabel
+        Left = 684
+        Height = 16
+        Top = 48
+        Width = 65
+        Caption = 'l_errorcount'
+        ParentColor = False
+      end
+      object Label14: TLabel
+        Left = 636
+        Height = 16
+        Top = 48
+        Width = 34
+        Caption = 'Errors:'
+        ParentColor = False
+      end
+    end
+    object Tab_TTYS: TTabSheet
+      Caption = 'TTYS'
+      ClientHeight = 316
+      ClientWidth = 800
+      object Combo_baudTTYS: TComboBox
+        Left = 20
+        Height = 23
+        Top = 24
+        Width = 91
+        ItemHeight = 15
+        ItemIndex = 5
+        Items.Strings = (
+          '600'
+          '1200'
+          '2400'
+          '4096'
+          '4800'
+          '9600'
+          '19200'
+          '38400'
+          '57600'
+          '115200'
+          '230400'
+        )
+        TabOrder = 0
+        Text = '9600'
+      end
+      object Button1: TButton
+        Left = 124
+        Height = 25
+        Top = 24
+        Width = 54
+        Caption = 'connect'
+        OnClick = Button1Click
+        TabOrder = 1
+      end
+      object Edit_TTYS_sendmsg: TEdit
+        Left = 20
+        Height = 23
+        Top = 64
+        Width = 91
+        TabOrder = 2
+        Text = 'Messagetext'
+      end
+      object Button2: TButton
+        Left = 124
+        Height = 25
+        Top = 62
+        Width = 54
+        Caption = 'send'
+        OnClick = Button2Click
+        TabOrder = 3
+      end
+      object Label15: TLabel
+        Left = 20
+        Height = 16
+        Top = 8
+        Width = 48
+        Caption = 'Baudrate'
+        ParentColor = False
+      end
+      object Edit_TTYS_receivemsg: TEdit
+        Left = 196
+        Height = 23
+        Top = 64
+        Width = 91
+        TabOrder = 4
+      end
+      object Label17: TLabel
+        Left = 20
+        Height = 16
+        Top = 48
+        Width = 27
+        Caption = 'Send'
+        ParentColor = False
+      end
+      object Label18: TLabel
+        Left = 196
+        Height = 16
+        Top = 48
+        Width = 41
+        Caption = 'Receive'
+        ParentColor = False
+      end
+    end
+  end
+  object ComboBox_comport: TComboBox
+    Left = 165
+    Height = 23
+    Top = 16
+    Width = 48
+    ItemHeight = 15
+    ItemIndex = 0
+    Items.Strings = (
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10'
+    )
+    TabOrder = 8
+    Text = '1'
+  end
+  object send_method: TRadioGroup
+    Left = 8
+    Height = 40
+    Top = 0
+    Width = 153
+    AutoFill = True
+    Caption = 'connection'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 22
+    ClientWidth = 149
+    Columns = 2
+    ItemIndex = 0
+    Items.Strings = (
+      'CommBoard'
+      'seriell'
+    )
+    OnClick = send_methodClick
+    TabOrder = 9
+  end
+  object LabelHostName1: TLabel
+    Left = 160
+    Height = 16
+    Top = 0
+    Width = 53
+    Caption = 'serial port'
+    ParentColor = False
+  end
+  object EditPort2: TEdit
+    Left = 440
+    Height = 23
+    Top = 16
+    Width = 73
+    TabOrder = 10
+    Text = '5004'
+  end
+  object Label16: TLabel
+    Left = 440
+    Height = 16
+    Top = 0
+    Width = 47
+    Caption = 'Port TTY'
+    ParentColor = False
+  end
+  object Memo_log_common: TMemo
+    Left = 8
+    Height = 152
+    Top = 392
+    Width = 803
+    OnChange = Memo_log_commonChange
+    ScrollBars = ssAutoVertical
+    TabOrder = 11
+  end
+  object LTCP: TLTCPComponent
+    Port = 0
+    OnReceive = LTCPComponentReceive
+    OnError = LTCPComponentError
+    OnDisconnect = LTCPComponentDisconnect
+    OnConnect = LTCPComponentConnect
+    OnAccept = LTCPComponentAccept
+    Timeout = 0
+    ReuseAddress = True
+    left = 80
+    top = 488
+  end
+  object MainMenu1: TMainMenu
+    left = 120
+    top = 432
+    object MenuItemFile: TMenuItem
+      Caption = '&File'
+      object MenuItemExit: TMenuItem
+        Caption = 'E&xit'
+        OnClick = MenuItemExitClick
+      end
+    end
+    object MenuItemHelp: TMenuItem
+      Caption = '&Help'
+      object MenuItemAbout: TMenuItem
+        Caption = '&About'
+        OnClick = MenuItemAboutClick
+      end
+    end
+  end
+  object TimerQuit: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = TimerQuitTimer
+    left = 40
+    top = 488
+  end
+  object Timer_poll: TTimer
+    Enabled = False
+    Interval = 300
+    OnTimer = Timer_pollTimer
+    left = 40
+    top = 432
+  end
+  object LTCP1: TLTCPComponent
+    Port = 0
+    OnReceive = LTCP1Receive
+    OnError = LTCP1Error
+    OnDisconnect = LTCP1Disconnect
+    OnConnect = LTCP1Connect
+    Timeout = 0
+    ReuseAddress = False
+    left = 80
+    top = 432
+  end
+end

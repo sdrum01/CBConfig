@@ -1,0 +1,167 @@
+unit Unit_BS;
+
+{$mode objfpc}
+
+
+interface
+
+uses
+  Classes, SysUtils, Dialogs, main;
+type
+    TBS500Telgrammtype = (bsFachfreigabe, bsFachverriegelung, bsPoll, bsReset, bsGetState);
+
+
+function BS500Checksum(s:string):byte;
+function BCDCharToByte(c:char):byte;
+function GetBS500FV100SendeString(SC,Platz:integer; TelegrammType:TBS500Telgrammtype):string;
+function HexToInt(HexNum: string): longint;
+function get_HexStr(s:string):AnsiString;
+function get_escape(aMsg:string):string;
+
+implementation
+
+const BS500_S_STX = char($F0);
+  BS500_S_ETX = char($F1);
+
+function BS500Checksum(s:string):byte;
+var b,i : integer;
+begin
+  b := 0;
+  for i := 1 to length(s) do
+    b := b + byte(s[i]);
+  result := not ((b - 1) and $ff); //die unteren 8Bits sind die Checksumme
+end;
+
+function HexToInt(HexNum: string): longint;
+begin
+  Result := StrToInt('$' + HexNum);
+end;
+
+function ByteToBCDChar(b:byte):char;
+var temp : byte;
+    res : byte;
+begin
+  b := b mod 100;  //Das Byte auf 99 beschränken
+  temp := (b div 10) shl 4;
+  res := (b mod 10) + temp;
+  result := char(res);
+end;
+
+function BCDCharToByte(c:char):byte;
+begin
+  result := ((byte(c) and $F0) shr 4) *10 + (byte(c) and $0F);
+end;
+
+
+// Einfache Konvertierung einer Zeichenkette in die Hex-Entsprechung der Zeichen
+function get_HexStr(s:string):AnsiString;
+var i : integer;
+    s1 :string;
+    ch : char;
+begin
+  s1 := '';
+  if s <> '' then
+  begin
+    for i := 1 to (length(s)) do
+    begin
+      ch := s[i];
+      s1 := s1 + ' '+IntToHex(byte(ch),2);
+    end;
+  end;
+  result := s1;
+end;
+
+function GetBS500FV100SendeString(SC,Platz:integer; TelegrammType:TBS500Telgrammtype):string;
+var adressbyte,byte2,temp : byte;
+  cmdBoxOrder,cmdCloseBox,cmdPoll,cmdReset,cmdGetState, TCByte1,TCByte2:char;
+begin
+  cmdBoxOrder := #$02;
+  cmdCloseBox := #$01;
+  cmdPoll :=     #$00;
+  cmdReset :=    #$05;
+  cmdGetState := #$04;
+  TCByte1 :=     #$7C;
+  TCByte2 :=     #$00;
+  //FNet.SendMessage('B11' + char($F0) + char($00) + char($01) + char($02) + char($7C) + char($00) + char($F1) + char($A0));
+  //*****************************************************************
+  //BS500
+  //
+  //Format   <STX><ADRESSBYTE><FACHNR><COMMAND><TC1><TC2><ETX><BCC>
+  //
+  //*****************************************************************
+  result := '' + BS500_S_STX;
+  adressbyte := SC shl 3;  //Bits F8 des adressbyte sind die SC-Nummer
+  case TelegrammType of
+    bsFachfreigabe,
+    bsFachverriegelung : begin
+
+        temp  := (platz div 100) and $07; //die 100er-Stelle muss ins adressbyte rein
+        adressbyte := adressbyte or temp;
+        platz := platz mod 100;  //die 100er-Stelle abschneiden
+        temp  := (platz div 10) shl 4;
+        byte2 := platz mod 10;
+        byte2 := byte2 or temp; //in byte2 wird 00..99 im BCD-Format gespeichert.
+        result := result + char(adressbyte) + char(byte2);
+        //ShowMessage(IntToHex(byte2,2));
+        if TelegrammType = bsFachfreigabe then
+          result := result + cmdBoxOrder
+        else
+          result := result + cmdCloseBox;
+
+        result := result + TCByte1 + TCByte2;
+      end;
+    bsPoll : begin
+        result := result + char(adressbyte) + #$ff + cmdPoll + TCByte1 + TCByte2;
+      end;
+    bsReset : begin
+        result := result + char(adressbyte) + #$ff + cmdReset + TCByte1 + TCByte2;
+      end;
+    bsGetState : begin
+        result := result + char(adressbyte) + #$ff + cmdGetState + TCByte1 + TCByte2;
+      end;
+  end;
+  result := result + BS500_S_ETX;
+  result := result + char(BS500Checksum(result));
+
+end;
+
+function get_escape(aMsg:string): string;
+var i : integer;
+  b0, b1 : byte;
+begin
+  result := '';
+  if (BS500Checksum(aMsg) = 0 ) then  // wenn die checksumme stimmt
+  begin
+
+    i := 1;
+    while i <= length(aMsg) do // bis zum vorletzten Zeichen
+    begin
+      b0 := byte(aMsg[i]);
+      b1 := byte(aMsg[i+1]);
+      //if i < length(aMsg) then // solange noch nicht das letzte Zeichen erreicht ist, müssen alle Zeichen escaped werden
+      //begin
+        if (b0 = $A5) then // STX oder ETX bei receive/transmit
+        begin
+          result := result + char(NOT(b1));
+          i := i+2;
+        end else
+        begin
+          result := result + char(b0);
+          i := i+1;
+        end;
+      end;
+
+    end else
+    begin
+      result := '';
+      FormMain.log_terminal('CB->Host: ' + #9 + 'Checksum Error !!!');
+    end;
+
+
+end;
+
+
+///////////////////////////////////
+
+end.
+

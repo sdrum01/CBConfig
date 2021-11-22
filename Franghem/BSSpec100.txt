@@ -1,0 +1,117 @@
+
+
+                        Communication with BS 100
+
+
+	1. Main differences between BS500 and BS100
+           a. STX-ETX not the same
+	   b. Timeing info for lockers
+	   c. 2 bits per box in answer
+           d. Extra short answer with up to 4 boxes
+           e. Even parity
+
+
+	2. Half duplex is used. 12 V.
+
+        3. 4096 baud, 8 data-bits, 1 stop-bit and even parity
+           Checksum is calculated as a digit 0 - $FF
+           The result of calculation including STX, ETX, and
+           checksum digit must be = 00
+
+        4. Receive to BS100
+
+           1. STX = $F2
+           2. BS number from 0x00(=BS first box 0000) to 0x99(BS 9900) 
+              in BCD format max 100
+           3. Box number 0x00-0x99 for box-order otherwise = $FF (BCD)
+           4. Command
+                00 Poll
+                01 Close box
+                02 Box-order 
+                03 -
+                04 Poll for long status
+                05 Reset BS
+           5. ETX = $F3
+           6. Cksm 
+
+           Ex. order box 1045
+           $F2,$10,$45,$02,$F3,$C4
+           Ex. normal poll
+           $F2,$10,$FF,$00,$F3,$0C
+      
+
+ 
+
+
+
+
+        5. Transmit from BS100.
+
+           Answer can be three different messages.
+
+           Short message is send as an answer to all
+           incoming messages except number 04.
+           
+           Long message is send as an answer to 04
+
+           If a hatch has been opened or closed the
+           long message or message with 4 boxes will
+           be sent as an answer to a poll (00).
+
+           Short message: (third byte = ETX)
+
+           1. STX = $E2
+           2. BS number = the same as the received.
+           3. ETX = $E3
+           4. Cksm
+
+           Ex 
+           $E2,$48,$E3,$F3
+
+
+	   Message with up to for boxes (Third byte = 0 to 99)
+           1. STX = $E2
+           2. BS number = the same as the received.
+           3. Boxnumber1 0x00 to 0x99 BCD
+	   4. Status for this box
+           5. Boxnumber2 0x00 to 0x99 Optional
+	   6. Status for this box       -"-
+           7. Boxnumber3 0x00 to 0x99   -"-
+	   8. Status for this box       -"-
+           9. Boxnumber4 0x00 to 0x99   -"-
+	  10. Status for this box       -"-
+          11. ETX = $E3
+          12. Cksm
+ 
+           This message can be 6 to 12 bytes.
+           In the status byte 2 bits are used (LSB)
+           0x00 Box closed
+           0x02 Box open
+           0x03 Box set as faulty. Not used in RBM. This flag is set
+                inside the RBM program.
+	   
+           Ex 
+           $E2,$48,$00,$02,$50,$00,$E3,$A1
+           Box 4800 opened, box 4850 closed
+
+           Long message (third byte = 0xE7)
+
+           1. STX = $E2
+           2. BS number = the same as the received.
+           3. $E7 = code for long message
+           4. 25 bytes box-info
+           5. ETX = $E3
+           6. Cksm
+
+           Ex (with all 100 boxes open)
+           $E2,$48,$E7,25 of $AA,$E3,$72
+
+           25 bytes is used as 2 bit / box = 2*100/8 = 25 byte
+           Box 000 is two MSB in the first byte and box 99 is two LSB bit
+           in byte 25.
+	   The two bits are as the status byte in earlier message.
+
+           If any of this bytes = ETX or STX  then it is changed,
+           for example $E2 is sent as $A5+$1D, 2 characters.
+           The second is the inverse of the character
+           

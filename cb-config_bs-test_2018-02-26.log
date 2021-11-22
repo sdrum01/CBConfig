@@ -1,0 +1,35 @@
+26.02.18-10:09:28;	no connection to 192.168.1.126:5000
+26.02.18-10:09:28;	Connected Port 5000 to remote host
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 0
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 1
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 2
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 3
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 4
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 5
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 6
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 7
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 8
+26.02.18-10:09:53;	state changed OPEN => CLOSED; Adr 0; Box 9
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 0
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 1
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 2
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 3
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 4
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 5
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 6
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 7
+26.02.18-10:10:03;	state changed CLOSED => OPEN; Adr 0; Box 8
+26.02.18-10:10:04;	state changed CLOSED => OPEN; Adr 0; Box 9
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 100
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 101
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 102
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 103
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 104
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 105
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 106
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 107
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 108
+26.02.18-10:10:08;	state changed OPEN => CLOSED; Adr 0; Box 109
+26.02.18-13:53:14;	OFFLINE; Adr 0;
+26.02.18-13:53:34;	Get error [10054]: An existing connection was forcibly closed by the remote host. Port 5000
+26.02.18-13:53:34;	Connection lost: Port5000

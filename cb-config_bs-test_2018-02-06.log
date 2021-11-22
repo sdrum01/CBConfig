@@ -1,0 +1,252 @@
+06.02.18-13:21:20;	Connected Port 5000 to remote host
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:21:49;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:22:06;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:10;	state changed CLOSED => OPEN; Adr 0; Box 0
+06.02.18-13:22:10;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:22:37;	state changed CLOSED => OPEN; Adr 0; Box 9
+06.02.18-13:22:47;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:22:55;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:55;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:56;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:56;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:57;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:57;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:58;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:58;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:59;	RELEASE; Adr 0; Box 0
+06.02.18-13:22:59;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:00;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:00;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:01;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:01;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:02;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:02;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:03;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:03;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:04;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:04;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:05;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:05;	RELEASE; Adr 0; Box 0
+06.02.18-13:23:06;	RELEASE; Adr 0; Box 0
+06.02.18-13:24:18;	Connection lost: Port5000
+06.02.18-13:27:52;	Connected Port 5000 to remote host
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:27:56;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:28:05;	state changed CLOSED => OPEN; Adr 0; Box 5
+06.02.18-13:28:05;	state changed CLOSED => OPEN; Adr 0; Box 6
+06.02.18-13:28:05;	state changed CLOSED => OPEN; Adr 0; Box 7
+06.02.18-13:28:05;	state changed CLOSED => OPEN; Adr 0; Box 8
+06.02.18-13:28:05;	state changed CLOSED => OPEN; Adr 0; Box 9
+06.02.18-13:28:06;	state changed CLOSED => OPEN; Adr 0; Box 0
+06.02.18-13:28:06;	state changed CLOSED => OPEN; Adr 0; Box 1
+06.02.18-13:28:06;	state changed CLOSED => OPEN; Adr 0; Box 2
+06.02.18-13:28:06;	state changed CLOSED => OPEN; Adr 0; Box 3
+06.02.18-13:28:06;	state changed CLOSED => OPEN; Adr 0; Box 4
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 100
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 101
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 102
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 103
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 104
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 105
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 106
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 107
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 108
+06.02.18-13:28:08;	state changed OPEN => CLOSED; Adr 0; Box 109
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 109
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 100
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 101
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 102
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 103
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 104
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 105
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 106
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 107
+06.02.18-13:28:11;	state changed CLOSED => OPEN; Adr 0; Box 108
+06.02.18-13:28:13;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:28:13;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:28:13;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:28:13;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:28:14;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:28:14;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:28:14;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:28:14;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:28:14;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:28:14;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 0
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 1
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 2
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 3
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 4
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 5
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 6
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 7
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 8
+06.02.18-13:28:18;	state changed CLOSED => OPEN; Adr 0; Box 9
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:28:21;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:39:06;	Connected Port 5000 to remote host
+06.02.18-13:39:16;	TCP connection Disconnected
+06.02.18-13:39:16;	Connection lost: Port5000
+06.02.18-13:39:21;	Connected Port 5000 to remote host
+06.02.18-13:39:28;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:39:28;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:39:29;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 0
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 1
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 2
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 3
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 4
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 5
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 6
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 7
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 8
+06.02.18-13:39:39;	state changed CLOSED => OPEN; Adr 0; Box 9
+06.02.18-13:39:41;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:39:41;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:39:42;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:40:13;	Connection lost: Port5000
+06.02.18-13:42:28;	Connected Port 5000 to remote host
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:42:32;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 0
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 1
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 2
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 3
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 4
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 5
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 6
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 7
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 8
+06.02.18-13:42:44;	state changed CLOSED => OPEN; Adr 0; Box 9
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 200
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 201
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 202
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 203
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 204
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 205
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 206
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 207
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 208
+06.02.18-13:42:47;	state changed OPEN => CLOSED; Adr 0; Box 209
+06.02.18-13:42:50;	state changed CLOSED => OPEN; Adr 0; Box 206
+06.02.18-13:42:51;	state changed OPEN => CLOSED; Adr 0; Box 206
+06.02.18-13:42:58;	state changed CLOSED => OPEN; Adr 0; Box 205
+06.02.18-13:42:59;	state changed OPEN => CLOSED; Adr 0; Box 205
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 205
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 206
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 207
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 208
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 209
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 200
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 201
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 202
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 203
+06.02.18-13:43:02;	state changed CLOSED => OPEN; Adr 0; Box 204
+06.02.18-13:43:08;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:43:08;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:43:08;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:43:09;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:43:09;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:43:09;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:43:09;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:43:09;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:43:09;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:43:09;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:47:27;	Connected Port 5000 to remote host
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:47:35;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:47:43;	state changed CLOSED => OPEN; Adr 0; Box 9
+06.02.18-13:47:43;	state changed CLOSED => OPEN; Adr 0; Box 0
+06.02.18-13:47:43;	state changed CLOSED => OPEN; Adr 0; Box 1
+06.02.18-13:47:43;	state changed CLOSED => OPEN; Adr 0; Box 2
+06.02.18-13:47:44;	state changed CLOSED => OPEN; Adr 0; Box 3
+06.02.18-13:47:44;	state changed CLOSED => OPEN; Adr 0; Box 4
+06.02.18-13:47:44;	state changed CLOSED => OPEN; Adr 0; Box 5
+06.02.18-13:47:44;	state changed CLOSED => OPEN; Adr 0; Box 6
+06.02.18-13:47:44;	state changed CLOSED => OPEN; Adr 0; Box 7
+06.02.18-13:47:44;	state changed CLOSED => OPEN; Adr 0; Box 8
+06.02.18-13:47:50;	state changed OPEN => CLOSED; Adr 0; Box 0
+06.02.18-13:47:50;	state changed OPEN => CLOSED; Adr 0; Box 1
+06.02.18-13:47:50;	state changed OPEN => CLOSED; Adr 0; Box 2
+06.02.18-13:47:51;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:47:51;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:47:51;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:47:51;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:47:51;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:47:51;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:47:51;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:47:57;	state changed CLOSED => OPEN; Adr 0; Box 3
+06.02.18-13:47:57;	state changed CLOSED => OPEN; Adr 0; Box 4
+06.02.18-13:47:57;	state changed CLOSED => OPEN; Adr 0; Box 5
+06.02.18-13:47:57;	state changed CLOSED => OPEN; Adr 0; Box 6
+06.02.18-13:47:57;	state changed CLOSED => OPEN; Adr 0; Box 7
+06.02.18-13:47:57;	state changed CLOSED => OPEN; Adr 0; Box 8
+06.02.18-13:47:57;	state changed CLOSED => OPEN; Adr 0; Box 9
+06.02.18-13:47:58;	state changed OPEN => CLOSED; Adr 0; Box 3
+06.02.18-13:47:58;	state changed OPEN => CLOSED; Adr 0; Box 4
+06.02.18-13:47:59;	state changed OPEN => CLOSED; Adr 0; Box 5
+06.02.18-13:47:59;	state changed OPEN => CLOSED; Adr 0; Box 6
+06.02.18-13:47:59;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:47:59;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:47:59;	state changed OPEN => CLOSED; Adr 0; Box 9
+06.02.18-13:48:01;	state changed CLOSED => OPEN; Adr 0; Box 8
+06.02.18-13:48:02;	state changed OPEN => CLOSED; Adr 0; Box 8
+06.02.18-13:48:05;	state changed CLOSED => OPEN; Adr 0; Box 7
+06.02.18-13:48:05;	state changed OPEN => CLOSED; Adr 0; Box 7
+06.02.18-13:48:06;	state changed CLOSED => OPEN; Adr 0; Box 6
+06.02.18-13:48:07;	state changed OPEN => CLOSED; Adr 0; Box 6

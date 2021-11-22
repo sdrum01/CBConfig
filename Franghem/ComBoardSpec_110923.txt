@@ -1,0 +1,279 @@
+
+	  Protocol for FS9 to BS-communication card		2010-06-28
+	___________________________________________________________________
+
+
+   TCP 1. 	
+       a. Communication with box selectors. This is always synchronous -
+          sending poll returns an answer.
+       b. Communication with I/O unit. This can bee both synchronous
+          and asynchronous. If the FS9 sends an outgoing message (I)
+          with info to the outputs there will be an answer (I) with
+          status and inputs. But if a change in input status occurs
+          this will immediate be send to FS9 (without waiting for poll).
+          This message can occur between a box selector request and the
+          answer to this.
+
+          Even if there is no change in outputs of the I/O unit, the
+          FS9 should send an 'I' message at some interval to update
+          the I/O unit. For example a reset of the new board can
+          turn of all outputs.
+
+   TCP 2.
+       a. Communication with card readers. This can bee both synchronous
+          and asynchronous. If the FS9 sends an outgoing message (C)
+          with text to the card reader there will be an answer (C) with
+          buttons or card. But if a button is pressed or a card read
+          this will immediate be send to FS9 (without waiting for poll).
+
+          The new board will poll the four possible card readers for
+          status and buttons/card without a poll from FS9. But if a 
+          text message from FS9 arrives, this will immediately be sent
+          to the card reader with a status reply.
+
+          FS9 should send a 'C' message at some interval to update
+          the card readers. For example a reset of the new board
+          removes the text in the card reader.
+
+   Ip-address
+          Default ip address is 192.168.1.126 Port is 5000 and 5001
+          If you want some other address let me know. There is also
+          a possibility to store the address in EE-memory.
+          If the comm-board is to be used in public nets then the unit 
+          must have a valid MAC address. This is something that Gunnebo
+          has to order from USA. Today it is set to just 01,02....
+
+          const tU08 hard_addr [6] = { 0x01, 0x23, 0x45, 0x56, 0x78, 0x9a };
+          const tU08 prot_addr [4] = { 192, 168,   1, 126 };
+          const tU08 netw_mask [4] = { 255, 255, 254,   0 };
+          const tU08 dfgw_addr [4] = { 192, 168,   0,   1 };
+          const tU08 brcs_addr [4] = { 192, 168,   0, 255 };
+
+	  Addresses in EE-memory
+				          Default
+	  Ip address	20,21,22,23	192.168.1.126
+	  Gateway       24,25,26,27     192.168.0.1
+          Port0         28,29           5000
+          Port1         2A,2B           5001
+          MAC		30-35           01,23,45,56,78,9A
+
+	  These values can be set with the test program.
+	  Values from EE-memory = Jumper P4 mounted 
+          Default values        = Jumper P4 not mounted.
+
+
+          FS9 must have a restart function for the TCP connection.
+          If no answer, close your sockets and open them again.
+
+   Leds on board
+       3 leds near TCP connector
+         LINK (green): Indicates whether a link is established with 
+                       another network device.
+         ACT  (yellow):Flashes when data is received by the device.
+         COL  (red)  : Flashes in half-duplex mode when a collision occurs 
+                       on the network.
+
+       6 leds
+         CON1 and CON2. (Green) Flashes when no TCP connection established.
+                        On when TCP connection established.
+         BS (yellow)    Flashes when message is received from any BS and 
+                        transmitted to TCP
+         GATE (yellow)  Flashes when message is sent from I/O unit to TCP
+         CP (yellow)    Flashes when message is received from any CP and 
+                        transmitted to TCP
+         TCP (yellow)   Flashes when message is received from TCP and 
+                        transmitted to any CP
+
+   1. Messages to box selectors (first socket)
+  
+      Message   = 'B'
+      Length    = 'LL' length of message ( 2 asccii char '01' to '99' )
+      Data      = The message used today
+	
+   2. Messages from box selectors
+
+      Message   = 'B'
+      Length    = 'LL'
+      Data      = The message used today
+  
+   3. Messages to I/O unit  (first socket)
+  
+      Message   = 'I'
+      Length    = 'LL'
+      Data      = 8 bytes (one/output) '0' = not active
+                                       '1' = active
+	
+   4. Messages from I/O unit
+
+      Message   = 'I'
+      Length    = 'LL'
+      Data      = 8 bytes (one/input) '0' = not active
+                                      '1' = active
+						  
+   5. Messages to card readers (second socket)
+
+
+      Message   = 'V'  Version question.
+      Length    = 'LL'
+
+      Answer:
+      Message   = 'V'  Version answer.
+      Length    = 'LL'
+      Data      = ' 1.1 '
+
+
+   6. Message   = 'D'  Definition of programable characters in display.
+      Length    = 'LL'
+      Char      =  7*8 bytes for 8 characters, 7 byte each (Matrix 7*5)
+
+                  This message must be sent regulary as an update.
+                  If the card readers are restarted, this information
+                  is lost.
+
+
+   7. Message   = 'C'
+      Length    = 'LL'
+      Address   = Unit number '1' to '4' (0x31 - 0x34)
+      Type      = Type of card reader 
+                    '1'=RBM-IDP, '2'=RLC-IP, '3'=RBM-GR
+
+      Language  = '01' 2 bytes
+
+      Command   = '0' Normally, = 'C' = cancel keyboard buffer
+
+      LED	= 8 bytes ( one / led)
+                  Led = '0' led off
+                  Led = '1' led on
+                  Led = '2' led flash
+
+      TEXT      = 40 bytes ASCCII
+                  Characters $00 - $07 is pointers
+                  to the internal RAM on the display
+                  Can be used for special characters
+		  Ok to always send 40 characters, even if only 16 used
+
+   8. Messages from card readers
+
+      Message   = 'C'
+      Length    = 'LL'
+      Address   = Unit number '1' to '4' (0x31 - 0x34)
+
+      Status    = '0' (0x30) Not answering
+                  '1' Active
+
+      Type      = '0' (0x30) No button or card (only keyboard buffer if present)
+                = '1' Buttons (new)
+                = 'B' card
+
+      Data      = If TYPE='0' no data
+                  1-6 bytes buttons
+                      '0' to '9' (0x30 - 0x39), Enter='#' (0x23), 
+                      Cancel='C' (0x43)
+                  Up to 39 bytes card code in asccii including
+                  start ('B') and end ('F') of card.
+                  If card not readable then 'B00F' is send.
+
+   9. Card readers
+      a. RBM-CP/IDP CP=control panel, 
+                    IDP=ID panel where you enter card and pin code
+                       40 characters 2*20.
+                        4 leds Yellow    Powered
+                               Red1	 System error not used in IDP
+                               Red2      Box error not used in IDP
+                               Green	 Box order ok
+                        1 Buzzer
+                       16 buttons, but only 12 used in IDP 0-9, C, # 
+                          <-, ->, <-> and alarm buttons not transmitted.
+      b. RBM-GR Gate reader
+                       No display, just a card reader
+                        1 Led  Green     Gate opened
+                          No buttons
+
+      c. RLC-IP41 card reader to alarm panel
+                       16 character 1*16
+                        4 led  Red/Green Active
+                               Yellow1   ?
+                               Yellow2   ?
+                               Green     Relay activated (Box order ok)
+                        1 Buzzer
+		       12 Buttons 0-9, C, #
+
+         Table for number to different leds in card readers
+
+		    IP-41		       IDP	         GR
+         1      0x01 = Green (Active)     Yellow (Net)
+         2      0x02 = Backlight          --
+         3      0x04 = Yellow 1	          Red    (Alarm)
+         4      0x08 = Yellow 2	          Yellow (Sys)
+         5      0x10 = Buzzer	          Buzzer
+         6      0x20 = Green (Unlocked)   Green  (Unlocked)  Green (Unlocked)
+         7      0x40 = Red (Not active)   --
+         8      0x80 = --                 --
+
+ 10. Hardware onboard.
+      a. Power from 24 V ~
+      b. Connection to FS9 via TCP RJ45 contact
+         The unit will have one ip-address and 2 ports
+      c. Connection to box selectors, both BS 500 and BS 100.
+         Power from 24 V ~ and a fuse. 2 contacts as on the MU card.
+      d. Connection for up to 4 card readers via current loop.
+         7 wires (inc. protection ground) as the party line from comm-board
+	 to CP/GR/IP (1-1,....7-7). Power from 24 V ~.
+      e. I/O controls 4 gate outputs via rely and 4 input for gate opened.
+         Expandable with 4 extra. Can of course be used as general 
+         outputs and inputs
+      f. Expandable with EE-memory to save for example setups.
+
+ 11. Up to four units can be connected to the bus for card readers.
+	 Jumpers for different units
+	 a. CP No jumper in "1 RLC", "RLC RBM" or "RLC"
+            Unit address in "1248"
+	      Unit 1 No jumper
+                   2 Jumper 1
+                   3 Jumper 2
+                   4 Jumper 1+2
+
+	 b. GR
+            For GR-function the address jumper "8" must be installed
+            Unit address like CP (1-4)
+            Limitation!! Not more then one GR-board can bee connected
+            to the bus. The problem is that CP/GR and IP was not designed
+            to work together in the same bus, so this limitation was
+            the smallest.
+            
+     c. IP
+	    No jumper in "C 1 2" or "D 1 2"
+            Jumper "CURR RLC" in RLC position.
+            Jumper "TG" and "BLD" installed
+            Unit address in "12"
+	      Unit 1 No jumper
+                   2 Jumper 1
+                   3 Jumper 2
+                   4 Jumper 1+2
+	Writing EEPROM:
+	
+	Messages write EE memory (first socket)
+  
+      Message   = 'E'
+      Length    = 'LL'
+      Type      = 'W'
+      Adr       = '1234' Address in memory as hex
+      Data      = 'FF' Data to burn
+ 
+      Messages read EE memory
+ 
+      Message   = 'E'
+      Length    = 'LL'
+      Type      = 'R'
+      Adr       = '1234' Address in memory as hex
+ 
+      Answer to both
+ 
+      Message   = 'E'
+      Length    = 'LL'
+      Adr       = '1234' Address in memory as hex
+      Data      = 'FF' Data from memory
+I will add the subnet mask in EE-memory at adr 002C-002F
+
+          
+  
