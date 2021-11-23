@@ -19,7 +19,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <MinorVersionNr Value="3"/>
+      <MinorVersionNr Value="4"/>
       <StringTable Comments="Test tool for communication board" CompanyName="GUNNEBO" LegalCopyright="Dirk Hanisch"/>
     </VersionInfo>
     <BuildModes Count="1">

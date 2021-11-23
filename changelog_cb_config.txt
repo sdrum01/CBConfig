@@ -10,5 +10,8 @@ V1.2.0.0    New Communicationboard CB2
 06.02.2018
 V1.3.1.0    Protokollierung der Release/Lockzyklen, Protokoll für Sequencetest
 
+V1.3.1.1    falsche Anzeige des Fachstatus wenn BS-Timout auftaucht: alle Fächer wurden erneut als geschlossen gemeldet.
 
+23.11.2021
 V1.4.0      Sofortiges Connecten des TTYSx als Serieller Port (Ab FW 1.4 wird sonst die Verbndung abgewiesen)
+            Kleiner Comport-Tester in Tab TTYx integriert

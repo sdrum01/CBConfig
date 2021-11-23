@@ -224,7 +224,7 @@ type
 
 
   const FORMHEIGHT = 800;
-  VERSION = '1.3.1.1';
+  VERSION = '1.4.0.0';
   CurrentOS = {$I %FPCTARGETOS };
 
     procedure SendToAll(const aMsg: string);
@@ -511,6 +511,7 @@ end;
 procedure TFormMain.LTCP1Connect(aSocket: TLSocket);
 begin
   log_terminal('Connected Port '+ port2+' to remote host');
+  log_common('Connected Port '+ port2+' to remote host');
   EditPort2.Color := clLime;
   //EditPort2.Enabled := false;
   command_stack.Clear;
@@ -1301,15 +1302,11 @@ begin
   if Panel_terminal.Visible then
   begin
     ini_write('GUI', 'SHOW_TERMINAL', '0');
-    //Panel_terminal.Visible := False;
-    //FormMain.Height := FormMain.Height - Panel_terminal.Height - 10;
     show_Terminal(false);
   end
   else
   begin
     ini_write('GUI', 'SHOW_TERMINAL', '1');
-    //Panel_terminal.Visible := True;
-    //FormMain.Height := FormMain.Height + Panel_terminal.Height + 10;
     show_Terminal(true);
   end;
 end;
@@ -1513,7 +1510,7 @@ begin
   ser.CloseSocket();
   connected_com := false;
   log_terminal('serial connection disconnected');
-  //Timer_poll.Enabled:= false;
+  log_common('serial connection disconnected');
 end;
 
 procedure TFormMain.serialReceive;
@@ -1549,6 +1546,7 @@ end;
 
 procedure TFormMain.Timer_ttysendTimer(Sender: TObject);
 begin
+  Edit_TTYS_receivemsg.Text:= '';
   FNet1.SendMessage(Edit_TTYS_sendmsg.Text);
 end;
 
@@ -1568,23 +1566,44 @@ end;
 // Testfunktion
 procedure TFormMain.connectTTY;
 var ttys_header , msg : string;
+i1 : integer;
+conn_abort:boolean;
 begin
-
+ conn_abort := false;
+ i1 := 0;
  //ttys_header := '{"Speed":9600,"DataBits":8,"StopBits":1,"Parity":"NONE","FlowControl": "NONE","HalfDuplex": false}'+ #10;
  ttys_header := '{"Speed":9600,"FlowControl": "NONE","HalfDuplex": false,"Parity":"NONE"}'+ #10;
  //ttys_header := '{"Speed" : '+ Combo_baudTTYS.Text +'}'+ #13#10;
   msg := ttys_header;
 
-  if FNet1.Connected then // Nochmal auf Verbindung prüfen
-      begin
-           FNet1.SendMessage(msg);
-           log_terminal('Host->CB ('+port2+'): ' + #9 + msg);
-      end
+  repeat
+    i1 := i1 + 1;
+    sleep(100);
+    // 100 mal probieren
+    if i1 > 100 then
+    begin
+     log_terminal('TTY Connection not ready' + #9 + ' trials: ' + intToStr(i1));
+     log_common('TTY Connection not ready' + #9 + ' trials: ' + intToStr(i1));
+     conn_abort := true;
+    end;
+    Application.ProcessMessages;
+  until FNet1.Connected or conn_abort = true;
+
+
+
+  if conn_abort = false then
+  begin
+
+    FNet1.SendMessage(msg);
+    log_terminal('Host->CB ('+port2+'): ' + #9 + msg + ' trials: ' + intToStr(i1));
+    log_common('TTY Connection to '+port2+' ready' + #9);
+  end;
 end;
 
 procedure TFormMain.Button2Click(Sender: TObject);
 begin
-  FNet1.SendMessage(Edit_TTYS_sendmsg.Text);
+ Edit_TTYS_receivemsg.Text:= '';
+ FNet1.SendMessage(Edit_TTYS_sendmsg.Text);
 end;
 
 
