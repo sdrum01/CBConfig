@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Buttons, lNetComponents, lNet, ExtCtrls, Menus, ComCtrls, Grids, Inifiles, synaser,
-  LCLIntf, types;
+  LCLIntf, types, dateutils ;
 var
   ser:TBlockSerial;
 
@@ -146,6 +146,7 @@ type
     procedure chk_out1Change(Sender: TObject);
 
     procedure Edit_boxChange(Sender: TObject);
+    procedure Edit_versionDblClick(Sender: TObject);
 
     procedure LTCP1Connect(aSocket: TLSocket);
     procedure LTCP1Disconnect(aSocket: TLSocket);
@@ -217,7 +218,7 @@ type
     FNet,FNet1: TLConnection;
     FIsserer, b_iswritten, terminal_log, connected_com : boolean;
     command_stack,command_stack1, command_stack_bs: TStringList;
-    temp_string, Ini_File, s_last_number, s_mac_vendor, brd_version, port2 : string;
+    temp_string, Ini_File, s_last_number, s_mac_vendor, brd_version, port1, port2 : string;
     arr_boxes : array[0..499]of boolean;
     request_cb, request_bs, current_box , ActiveBox, bs_errorcounter, act_linenr: integer;
 
@@ -246,6 +247,14 @@ uses
 
 { TFormMain }
 
+procedure mDelay(milliSecondsDelay: int64);
+var
+  stopTime : TDateTime;
+begin
+  stopTime := IncMilliSecond(Now,milliSecondsDelay);
+  while (Now < stopTime) and (not Application.Terminated) do
+    Application.ProcessMessages;
+end;
 
 Procedure WriteLog(s, LogFile : String);
 Var
@@ -335,10 +344,11 @@ begin
 
   s := ini_read('HOST', 'PORT');
   If s = '' then EditPort.Text := '5000' else EditPort.Text := s;
+  If s = '' then port1 := '5000' else port1 := s;
 
   s := ini_read('HOST', 'PORT2');
   If s = '' then EditPort2.Text := '5001' else EditPort2.Text := s;
-  If s = '' then port2 := '5000' else port2 := s;
+  If s = '' then port2 := '5001' else port2 := s;
 
   s := ini_read('EEPROM', 'LAST_MAC_ENUM');
   If s = '' then s_last_number := '4144' else s_last_number := s;
@@ -435,18 +445,18 @@ begin
     begin
       if FNet.Connected = False then  // Versuche neu zu verbinden
       begin
-           if FNet.Connect(EditIP.Text, StrToInt(EditPort.Text)) then
+           if FNet.Connect(EditIP.Text, StrToInt(port1)) then
            FIsserer := False;
       end;
       if FNet.Connected then // Nochmal auf Verbindung prüfen
       begin
            FNet.SendMessage(command_stack[0]);
            inc(request_cb);
-           if log then log_terminal('Host->CB ('+EditPort.Text+'): ' + #9 + command_stack[0]);
+           if log then log_terminal('Host->CB ('+port1+'): ' + #9 + command_stack[0]);
            command_stack.Delete(0); // Wie FIFO: oben drauf und unten weg
            EditPort.Color := clLime;
       end else
-      log_common('no connection to ' + EditIP.Text + ':' + EditPort.Text);
+      log_common('no connection to ' + EditIP.Text + ':' + port1);
     end;
 
 
@@ -507,6 +517,12 @@ begin
 end;
 
 
+procedure TFormMain.Edit_versionDblClick(Sender: TObject);
+begin
+  if FNet.Connected then get_brdversion();
+end;
+
+
 
 procedure TFormMain.LTCP1Connect(aSocket: TLSocket);
 begin
@@ -520,7 +536,7 @@ end;
 
 procedure TFormMain.LTCP1Disconnect(aSocket: TLSocket);
 begin
-  log_terminal('Connection lost: Port' + port2);
+  log_terminal('Connection disconnected: Port' + port2);
   EditPort2.Color := clNone;
   //EditPort2.Enabled := true;
 end;
@@ -536,7 +552,6 @@ begin
   if aSocket.GetMessage(s) > 0 then
   begin
     request_cb := 0;
-    //filter_msg(s);
     Edit_TTYS_receivemsg.Text:= s;
     log_terminal('received on Port '+port2+':'+s);
   end;
@@ -840,7 +855,7 @@ begin
   if (command = 'E') then
   begin
     // IP
-    log_terminal('CB->Host ('+EditPort.Text+'): ' + #9 + aMsg);
+    log_terminal('CB->Host ('+port1+'): ' + #9 + aMsg);
     if (copy(aMsg, 4, 4) = '0020') then
       Edit_IP_1.Text := IntToStr(HexToInt(copy(aMsg, 8, 2)));
     if (copy(aMsg, 4, 4) = '0021') then
@@ -913,7 +928,7 @@ begin
   begin
     brd_version := copy(aMsg, 4, 20);
     Edit_version.Text := brd_version;
-    log_terminal('CB->Host ('+EditPort.Text+'): ' + #9 + aMsg);
+    log_terminal('CB->Host ('+port1+'): ' + #9 + aMsg);
     if (copy(brd_version,0,5) = 'SDLCB')then
     begin
        GroupBox_EE.Enabled:= false;
@@ -933,7 +948,7 @@ begin
   if (command = 'I') then
   begin
     // IP
-    log_terminal('CB->Host ('+EditPort.Text+'): ' + #9 + aMsg);
+    log_terminal('CB->Host ('+port1+'): ' + #9 + aMsg);
     get_IO(copy(aMsg, 4, 8));
   end;
 end;
@@ -1146,6 +1161,7 @@ end;
 
 procedure TFormMain.ConnectButtonClick(Sender: TObject);
 begin
+ port1 :=  EditPort.Text;
  port2 :=  EditPort2.Text;
  Tab_TTYS.Caption:= 'TTYS Port '+port2 ;
  case send_method.ItemIndex of
@@ -1157,7 +1173,7 @@ begin
        connectTTY;
      end;
 
-     if FNet.Connect(EditIP.Text, StrToInt(EditPort.Text)) then
+     if FNet.Connect(EditIP.Text, StrToInt(port1)) then
      begin
        FIsserer := False;
      end;
@@ -1173,13 +1189,15 @@ end;
 
 procedure TFormMain.LTCPComponentConnect(aSocket: TLSocket);
 begin
-  log_common('Connected Port '+ EditPort.Text+' to remote host');
+
+ log_common('Connected Port '+ port1+' to remote host');
   EditPort.Color := clLime;
   EditPort.Enabled := false;
   Timer_poll.Enabled:= true;
   command_stack.Clear;
   command_stack_bs.Clear;
   // if FNet.Connected then get_ip();
+  mDelay(100);
   if FNet.Connected then get_brdversion();
 end;
 
@@ -1210,13 +1228,14 @@ end;
 
 procedure TFormMain.LTCPComponentError(const msg: string; aSocket: TLSocket);
 begin
-  log_common(msg+' Port '+EditPort.Text);
+  log_common(msg+' Port '+port1);
   MemoText.SelStart := Length(MemoText.Lines.Text);
 end;
 
 procedure TFormMain.LTCPComponentAccept(aSocket: TLSocket);
 begin
   log_common('Connection accepted');
+
   //MemoText.SelStart := Length(MemoText.Lines.Text);
 end;
 
@@ -1244,7 +1263,7 @@ end;
 
 procedure TFormMain.LTcpComponentDisconnect(aSocket: TLSocket);
 begin
-  log_common('Connection lost: Port' + EditPort.Text);
+  log_common('Connection disconnected: Port' + port1);
   MemoText.SelStart := Length(MemoText.Lines.Text);
   Timer_poll.Enabled:= false;
   EditPort.Color := clNone;
@@ -1258,7 +1277,7 @@ procedure TFormMain.MenuItemAboutClick(Sender: TObject);
 begin
   MessageDlg('config tool for setting of communicationboard and test of IO' +
   #13#10 + 'test tool for SDL-Boxes on BS500 over communicationboard or serial connection' +
-    #13#10 +#13#10 + VERSION + #13#10 + 'GUNNEBO 2012-2018 Dirk Hanisch',
+    #13#10 +#13#10 + VERSION + #13#10 + 'GUNNEBO 2012-2022 Dirk Hanisch',
     mtInformation, [mbOK], 0);
 end;
 
@@ -1288,6 +1307,7 @@ begin
    end;
 
  end;
+ command_stack.Clear;
  command_stack_bs.Clear;
  Panel_bsNoAnswer.Color:= clSilver; Panel_bsNoAnswer.Caption:= 'offline';
  Timer_poll.Enabled:=false;

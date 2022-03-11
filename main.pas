@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Buttons, lNetComponents, lNet, ExtCtrls, Menus, ComCtrls, Grids, Inifiles, synaser,
-  LCLIntf, types;
+  LCLIntf, types, dateutils ;
 var
   ser:TBlockSerial;
 
@@ -146,6 +146,7 @@ type
     procedure chk_out1Change(Sender: TObject);
 
     procedure Edit_boxChange(Sender: TObject);
+    procedure Edit_versionDblClick(Sender: TObject);
 
     procedure LTCP1Connect(aSocket: TLSocket);
     procedure LTCP1Disconnect(aSocket: TLSocket);
@@ -224,7 +225,7 @@ type
 
 
   const FORMHEIGHT = 800;
-  VERSION = '1.4.0.0';
+  VERSION = '1.4.1.0';
   CurrentOS = {$I %FPCTARGETOS };
 
     procedure SendToAll(const aMsg: string);
@@ -246,6 +247,14 @@ uses
 
 { TFormMain }
 
+procedure mDelay(milliSecondsDelay: int64);
+var
+  stopTime : TDateTime;
+begin
+  stopTime := IncMilliSecond(Now,milliSecondsDelay);
+  while (Now < stopTime) and (not Application.Terminated) do
+    Application.ProcessMessages;
+end;
 
 Procedure WriteLog(s, LogFile : String);
 Var
@@ -508,6 +517,12 @@ begin
 end;
 
 
+procedure TFormMain.Edit_versionDblClick(Sender: TObject);
+begin
+  if FNet.Connected then get_brdversion();
+end;
+
+
 
 procedure TFormMain.LTCP1Connect(aSocket: TLSocket);
 begin
@@ -521,7 +536,7 @@ end;
 
 procedure TFormMain.LTCP1Disconnect(aSocket: TLSocket);
 begin
-  log_terminal('Connection lost: Port' + port2);
+  log_terminal('Connection disconnected: Port' + port2);
   EditPort2.Color := clNone;
   //EditPort2.Enabled := true;
 end;
@@ -537,7 +552,6 @@ begin
   if aSocket.GetMessage(s) > 0 then
   begin
     request_cb := 0;
-    //filter_msg(s);
     Edit_TTYS_receivemsg.Text:= s;
     log_terminal('received on Port '+port2+':'+s);
   end;
@@ -1175,13 +1189,15 @@ end;
 
 procedure TFormMain.LTCPComponentConnect(aSocket: TLSocket);
 begin
-  log_common('Connected Port '+ port1+' to remote host');
+
+ log_common('Connected Port '+ port1+' to remote host');
   EditPort.Color := clLime;
   EditPort.Enabled := false;
   Timer_poll.Enabled:= true;
   command_stack.Clear;
   command_stack_bs.Clear;
   // if FNet.Connected then get_ip();
+  mDelay(100);
   if FNet.Connected then get_brdversion();
 end;
 
@@ -1219,6 +1235,7 @@ end;
 procedure TFormMain.LTCPComponentAccept(aSocket: TLSocket);
 begin
   log_common('Connection accepted');
+
   //MemoText.SelStart := Length(MemoText.Lines.Text);
 end;
 
@@ -1246,7 +1263,7 @@ end;
 
 procedure TFormMain.LTcpComponentDisconnect(aSocket: TLSocket);
 begin
-  log_common('Connection lost: Port' + port1);
+  log_common('Connection disconnected: Port' + port1);
   MemoText.SelStart := Length(MemoText.Lines.Text);
   Timer_poll.Enabled:= false;
   EditPort.Color := clNone;
@@ -1260,7 +1277,7 @@ procedure TFormMain.MenuItemAboutClick(Sender: TObject);
 begin
   MessageDlg('config tool for setting of communicationboard and test of IO' +
   #13#10 + 'test tool for SDL-Boxes on BS500 over communicationboard or serial connection' +
-    #13#10 +#13#10 + VERSION + #13#10 + 'GUNNEBO 2012-2018 Dirk Hanisch',
+    #13#10 +#13#10 + VERSION + #13#10 + 'GUNNEBO 2012-2022 Dirk Hanisch',
     mtInformation, [mbOK], 0);
 end;
 
@@ -1290,6 +1307,7 @@ begin
    end;
 
  end;
+ command_stack.Clear;
  command_stack_bs.Clear;
  Panel_bsNoAnswer.Color:= clSilver; Panel_bsNoAnswer.Caption:= 'offline';
  Timer_poll.Enabled:=false;

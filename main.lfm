@@ -221,9 +221,9 @@ object FormMain: TFormMain
     Height = 344
     Top = 40
     Width = 808
-    ActivePage = Tab_TTYS
+    ActivePage = Tab_EEProm
     ParentFont = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 7
     OnChange = PageControl1Change
     object Tab_EEProm: TTabSheet
@@ -620,6 +620,7 @@ object FormMain: TFormMain
         Height = 23
         Top = 24
         Width = 80
+        OnDblClick = Edit_versionDblClick
         TabOrder = 2
       end
       object Label11: TLabel
