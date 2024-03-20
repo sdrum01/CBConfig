@@ -88,6 +88,7 @@
       </SyntaxOptions>
     </Parsing>
     <CodeGeneration>
+      <TargetCPU Value="i386"/>
       <Optimizations>
         <OptimizationLevel Value="2"/>
       </Optimizations>
@@ -96,7 +97,6 @@
       <Debugging>
         <GenerateDebugInfo Value="False"/>
         <UseLineInfoUnit Value="False"/>
-        <StripSymbols Value="True"/>
       </Debugging>
       <LinkSmart Value="True"/>
       <Options>
