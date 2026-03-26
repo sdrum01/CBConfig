@@ -12,3 +12,7 @@
 *.compiled
 *.log
 *.ppu
+*.o
+*.lrs
+lib/
+backup/
