@@ -1003,7 +1003,7 @@ begin
 
   end else
   begin
-    Init_StringGrid;
+    //Init_StringGrid;
   end;
 
   // Wenn ein Fach angesteuert wird, aber dessen Tür offen ist, erlischt die Freigabe wieder auf der BS500

@@ -17,6 +17,7 @@ type
 
   TFormMain = class(TForm)
     box1: TButton;
+    b_memoTerminal_clear: TButton;
     Button2: TButton;
     b_webconfig: TButton;
     B_save_log: TButton;
@@ -31,6 +32,23 @@ type
     ButtonDiconnect: TButton;
     ButtonConnect: TButton;
     Chb_ttysend: TCheckBox;
+    Chk_in10: TCheckBox;
+    Chk_in11: TCheckBox;
+    Chk_in12: TCheckBox;
+    Chk_in13: TCheckBox;
+    Chk_in14: TCheckBox;
+    Chk_in15: TCheckBox;
+    Chk_in16: TCheckBox;
+    Chk_out10: TCheckBox;
+    Chk_out11: TCheckBox;
+    Chk_out12: TCheckBox;
+    Chk_out13: TCheckBox;
+    Chk_out14: TCheckBox;
+    Chk_out15: TCheckBox;
+    Chk_out16: TCheckBox;
+    Chk_in9: TCheckBox;
+    Chk_out9: TCheckBox;
+    chk_cbversion: TCheckBox;
     chk_out1: TCheckBox;
     chk_in2: TCheckBox;
     chk_in3: TCheckBox;
@@ -47,6 +65,7 @@ type
     chk_out7: TCheckBox;
     chk_out8: TCheckBox;
     chk_in1: TCheckBox;
+    Cb_IOextension: TComboBox;
     ComboBox_comport: TComboBox;
     Combo_baudTTYS: TComboBox;
     Edit_TTYS_receivemsg: TEdit;
@@ -87,9 +106,11 @@ type
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
+    Label19: TLabel;
     l_errorcount: TLabel;
     LabelHostName1: TLabel;
-    LTCP1: TLTCPComponent;
+    LTCP_client1 : TLTCPComponent;
+    LTCP_client2: TLTCPComponent;
     l_sendcount: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -99,14 +120,14 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    LTCP: TLTCPComponent;
+
     EditPort: TEdit;
     EditIP: TEdit;
     LabelPort: TLabel;
     LabelHostName: TLabel;
     MainMenu1: TMainMenu;
-    Memo_log_common: TMemo;
-    MemoText: TMemo;
+    MemoLogCommon: TMemo;
+    MemoTerminal: TMemo;
     MenuItemExit: TMenuItem;
     MenuItemAbout: TMenuItem;
     MenuItemHelp: TMenuItem;
@@ -131,6 +152,8 @@ type
     TB_sequence: TToggleBox;
     TB_perm_rel: TToggleBox;
     procedure box1Click(Sender: TObject);
+    procedure b_memoTerminal_clearClick(Sender: TObject);
+    procedure Cb_IOextensionChange(Sender: TObject);
     procedure Chb_ttysendChange(Sender: TObject);
     procedure connectTTY;
     procedure Button2Click(Sender: TObject);
@@ -147,13 +170,14 @@ type
 
     procedure Edit_boxChange(Sender: TObject);
     procedure Edit_versionDblClick(Sender: TObject);
+    procedure LTCP_client1Receive(aSocket: TLSocket);
 
-    procedure LTCP1Connect(aSocket: TLSocket);
-    procedure LTCP1Disconnect(aSocket: TLSocket);
-    procedure LTCP1Error(const msg: string; aSocket: TLSocket);
-    procedure LTCP1Receive(aSocket: TLSocket);
-    procedure MemoTextChange(Sender: TObject);
-    procedure Memo_log_commonChange(Sender: TObject);
+    procedure LTCP_client2Connect(aSocket: TLSocket);
+    procedure LTCP_client2Disconnect(aSocket: TLSocket);
+    procedure LTCP_client2Error(const msg: string; aSocket: TLSocket);
+    procedure LTCP_client2Receive(aSocket: TLSocket);
+    procedure MemoTerminalChange(Sender: TObject);
+    procedure MemoLogCommonChange(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure Panel_bsNoAnswerClick(Sender: TObject);
     procedure rg_BsAdrClick(Sender: TObject);
@@ -174,7 +198,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure LTCPComponentError(const msg: string; aSocket: TLSocket);
     procedure LTCPComponentAccept(aSocket: TLSocket);
-    procedure LTCPComponentReceive(aSocket: TLSocket);
+
     procedure LTcpComponentDisconnect(aSocket: TLSocket);
     procedure MenuItemAboutClick(Sender: TObject);
     procedure MenuItemExitClick(Sender: TObject);
@@ -225,10 +249,10 @@ type
 
 
   const FORMHEIGHT = 800;
-  VERSION = '1.4.0.0';
+  VERSION = '1.4.1.0';
   CurrentOS = {$I %FPCTARGETOS };
 
-    procedure SendToAll(const aMsg: string);
+    // procedure SendToAll(const aMsg: string);
 
 
   public
@@ -298,10 +322,10 @@ begin
   myicon := TIcon.Create;
   myicon.LoadFromLazarusResource('network-wired');
 
-  MemoText.color := clBlack;
-  MemoText.Font.color:= clLime;
-  FNet := LTCP;
-  FNet1 := LTCP1;
+  MemoTerminal.color := clBlack;
+  MemoTerminal.Font.color:= clLime;
+  //FNet := LTCP_client1;
+  FNet1 := LTCP_client2;
   FIsserer := False;
   b_iswritten := False;
   ActiveBox := -1;
@@ -443,14 +467,15 @@ begin
 
     if (command_stack.Count > 0) then
     begin
-      if FNet.Connected = False then  // Versuche neu zu verbinden
+      if LTCP_client1.Connected = False then  // Versuche neu zu verbinden
       begin
-           if FNet.Connect(EditIP.Text, StrToInt(port1)) then
+           if LTCP_client1.Connect(EditIP.Text, StrToInt(port1)) then
            FIsserer := False;
       end;
-      if FNet.Connected then // Nochmal auf Verbindung prüfen
+      if LTCP_client1.Connected then // Nochmal auf Verbindung prüfen
       begin
-           FNet.SendMessage(command_stack[0]);
+           LTCP_client1.SendMessage(command_stack[0]);
+           //LTCP_client1.SendMessage(command_stack[0]+ #10);
            inc(request_cb);
            if log then log_terminal('Host->CB ('+port1+'): ' + #9 + command_stack[0]);
            command_stack.Delete(0); // Wie FIFO: oben drauf und unten weg
@@ -519,12 +544,29 @@ end;
 
 procedure TFormMain.Edit_versionDblClick(Sender: TObject);
 begin
-  if FNet.Connected then get_brdversion();
+  if LTCP_client1.Connected then get_brdversion();
+end;
+
+procedure TFormMain.LTCP_client1Receive(aSocket: TLSocket);
+var
+  s: string;
+begin
+  while aSocket.GetMessage(s) > 0 do
+  begin
+    //log_terminal('TEST CB->Host ('+port1+'): ' + #9 + s);
+    request_cb := 0;
+    filter_msg(s);
+  end;
+
+  if (command_stack.Count > 0) then
+    send_command;
+
 end;
 
 
 
-procedure TFormMain.LTCP1Connect(aSocket: TLSocket);
+
+procedure TFormMain.LTCP_client2Connect(aSocket: TLSocket);
 begin
   log_terminal('Connected Port '+ port2+' to remote host');
   log_common('Connected Port '+ port2+' to remote host');
@@ -534,19 +576,19 @@ begin
   command_stack_bs.Clear;
 end;
 
-procedure TFormMain.LTCP1Disconnect(aSocket: TLSocket);
+procedure TFormMain.LTCP_client2Disconnect(aSocket: TLSocket);
 begin
   log_terminal('Connection disconnected: Port' + port2);
   EditPort2.Color := clNone;
   //EditPort2.Enabled := true;
 end;
 
-procedure TFormMain.LTCP1Error(const msg: string; aSocket: TLSocket);
+procedure TFormMain.LTCP_client2Error(const msg: string; aSocket: TLSocket);
 begin
   log_terminal(msg+' Port '+port2);
 end;
 
-procedure TFormMain.LTCP1Receive(aSocket: TLSocket);
+procedure TFormMain.LTCP_client2Receive(aSocket: TLSocket);
 var s: string;
 begin
   if aSocket.GetMessage(s) > 0 then
@@ -557,24 +599,24 @@ begin
   end;
 end;
 
-procedure TFormMain.MemoTextChange(Sender: TObject);
+procedure TFormMain.MemoTerminalChange(Sender: TObject);
 var
   grenze : Integer;
 begin
   // Wie viele Zeilen darf das Memo nicht überschreiten
   grenze := 100;
-  if MemoText.Lines.Count > grenze then
-    MemoText.Lines.Delete(0);
+  if MemoTerminal.Lines.Count > grenze then
+    MemoTerminal.Lines.Delete(0);
 end;
 
-procedure TFormMain.Memo_log_commonChange(Sender: TObject);
+procedure TFormMain.MemoLogCommonChange(Sender: TObject);
 var
   grenze : Integer;
 begin
   // Wie viele Zeilen darf das Memo nicht überschreiten
   grenze := 500;
-  if Memo_log_common.Lines.Count > grenze then
-    Memo_log_common.Lines.Delete(0);
+  if MemoLogCommon.Lines.Count > grenze then
+    MemoLogCommon.Lines.Delete(0);
 end;
 
 procedure TFormMain.PageControl1Change(Sender: TObject);
@@ -610,18 +652,18 @@ procedure TFormMain.B_save_logClick(Sender: TObject);
 var logfile : string;
 begin
   logfile := ExtractFileDir(Application.ExeName) + '\cb_config_'+ FormatDateTime('yy-mm-dd_hh_mm_ss',now)+'.log';
-  If MemoText.Lines.Count > 0 then
+  If MemoTerminal.Lines.Count > 0 then
   begin
-    MemoText.Lines.SaveToFile(logfile);
-    MemoText.Clear;
+    MemoTerminal.Lines.SaveToFile(logfile);
+    MemoTerminal.Clear;
     ShowMessage('logfile saved in '+ logfile);
   end;
 end;
 
 procedure TFormMain.log_terminal(s:string);
 begin
-  //if (Panel_terminal.Visible and terminal_log) then MemoText.Append(TimeToStr(Now)+ #9 + s);
-  if (terminal_log) then MemoText.Append(FormatDateTime('hh:mm:ss z',now)+ #9 + s);
+  //if (Panel_terminal.Visible and terminal_log) then MemoTerminal.Append(TimeToStr(Now)+ #9 + s);
+  if (terminal_log) then MemoTerminal.Append(FormatDateTime('hh:mm:ss z',now)+ #9 + s);
 end;
 
 procedure TFormMain.log_common(s:string);
@@ -630,9 +672,9 @@ begin
   inc(act_linenr);
   s1 := intToStr(act_linenr)+ #9 +FormatDateTime('hh:mm:ss z',now)+ #9 + s;
   logfilename := 'cb-config_bs-test_'+FormatDateTime('YYYY-MM-DD',now)+'.log';
-  //if (Panel_terminal.Visible and terminal_log) then MemoText.Append(TimeToStr(Now)+ #9 + s);
+  //if (Panel_terminal.Visible and terminal_log) then MemoTerminal.Append(TimeToStr(Now)+ #9 + s);
 
-  Memo_log_common.Append(s1);
+  MemoLogCommon.Append(s1);
   WriteLog(s,logfilename);
 end;
 
@@ -667,6 +709,55 @@ begin
   releaseBox(current_box);
 end;
 
+procedure TFormMain.b_memoTerminal_clearClick(Sender: TObject);
+begin
+  MemoTerminal.Clear;
+end;
+
+procedure TFormMain.Cb_IOextensionChange(Sender: TObject);
+begin
+ if (Cb_IOextension.ItemIndex > 0) then
+ begin
+   chk_out9.Visible:= true;
+   chk_out10.Visible:= true;
+   chk_out11.Visible:= true;
+   chk_out12.Visible:= true;
+   chk_out13.Visible:= true;
+   chk_out14.Visible:= true;
+   chk_out15.Visible:= true;
+   chk_out16.Visible:= true;
+
+   chk_in9.Visible:= true;
+   chk_in10.Visible:= true;
+   chk_in11.Visible:= true;
+   chk_in12.Visible:= true;
+   chk_in13.Visible:= true;
+   chk_in14.Visible:= true;
+   chk_in15.Visible:= true;
+   chk_in16.Visible:= true;
+ end else
+ begin
+   chk_out9.Visible:= false;
+   chk_out10.Visible:= false;
+   chk_out11.Visible:= false;
+   chk_out12.Visible:= false;
+   chk_out13.Visible:= false;
+   chk_out14.Visible:= false;
+   chk_out15.Visible:= false;
+   chk_out16.Visible:= false;
+
+   chk_in9.Visible:= false;
+   chk_in10.Visible:= false;
+   chk_in11.Visible:= false;
+   chk_in12.Visible:= false;
+   chk_in13.Visible:= false;
+   chk_in14.Visible:= false;
+   chk_in15.Visible:= false;
+   chk_in16.Visible:= false;
+ end;
+
+end;
+
 procedure TFormMain.Chb_ttysendChange(Sender: TObject);
 begin
   Timer_ttysend.Enabled:= Chb_ttysend.Checked;
@@ -686,7 +777,7 @@ procedure TFormMain.Button_PollClick(Sender: TObject);
 
 begin
   //timer_poll.Enabled := NOT timer_poll.Enabled;
-  terminal_log := NOT terminal_log;
+  // terminal_log := NOT terminal_log;
 end;
 
 procedure TFormMain.poll_bs;
@@ -738,36 +829,38 @@ end;
 
 procedure TFormMain.get_ip();
 begin
-  // Befehlskette für alle nötigen Speicherzellen
-  // IP
-  command_stack.Add('E08R0020');
-  command_stack.Add('E08R0021');
-  command_stack.Add('E08R0022');
-  command_stack.Add('E08R0023');
-  // gateway
-  command_stack.Add('E08R0024');
-  command_stack.Add('E08R0025');
-  command_stack.Add('E08R0026');
-  command_stack.Add('E08R0027');
-  // Port 0
-  command_stack.Add('E08R0028');
-  command_stack.Add('E08R0029');
-  // Port 1
-  command_stack.Add('E08R002A');
-  command_stack.Add('E08R002B');
-  // Subnet mask
-  command_stack.Add('E08R002C');
-  command_stack.Add('E08R002D');
-  command_stack.Add('E08R002E');
-  command_stack.Add('E08R002F');
-  // MAC adresse
-  command_stack.Add('E08R0030');
-  command_stack.Add('E08R0031');
-  command_stack.Add('E08R0032');
-  command_stack.Add('E08R0033');
-  command_stack.Add('E08R0034');
-  command_stack.Add('E08R0035');
-
+  if (chk_cbversion.Checked = false)then
+  begin
+    // Befehlskette für alle nötigen Speicherzellen
+    // IP
+    command_stack.Add('E08R0020');
+    command_stack.Add('E08R0021');
+    command_stack.Add('E08R0022');
+    command_stack.Add('E08R0023');
+    // gateway
+    command_stack.Add('E08R0024');
+    command_stack.Add('E08R0025');
+    command_stack.Add('E08R0026');
+    command_stack.Add('E08R0027');
+    // Port 0
+    command_stack.Add('E08R0028');
+    command_stack.Add('E08R0029');
+    // Port 1
+    command_stack.Add('E08R002A');
+    command_stack.Add('E08R002B');
+    // Subnet mask
+    command_stack.Add('E08R002C');
+    command_stack.Add('E08R002D');
+    command_stack.Add('E08R002E');
+    command_stack.Add('E08R002F');
+    // MAC adresse
+    command_stack.Add('E08R0030');
+    command_stack.Add('E08R0031');
+    command_stack.Add('E08R0032');
+    command_stack.Add('E08R0033');
+    command_stack.Add('E08R0034');
+    command_stack.Add('E08R0035');
+  end;
   // firmware version
   command_stack1.Add('V03');
 
@@ -850,7 +943,8 @@ procedure TFormMain.filter_msg(const aMsg: string);
 var
   command, bs_string: string;
 begin
-  command := copy(aMsg, 0, 1);
+
+ command := copy(aMsg, 0, 1);
   bs_string := '';
   if (command = 'E') then
   begin
@@ -1083,41 +1177,52 @@ end;
 procedure TFormMain.set_IO();
 var
   s_io: string;
+  i, io_count: Integer;
+  chk: array[1..16] of TCheckBox;
 begin
+  io_count := 8;
+
+  // CheckBoxen zuweisen
+  chk[1] := chk_out1;
+  chk[2] := chk_out2;
+  chk[3] := chk_out3;
+  chk[4] := chk_out4;
+  chk[5] := chk_out5;
+  chk[6] := chk_out6;
+  chk[7] := chk_out7;
+  chk[8] := chk_out8;
+
   s_io := '00000000';
-  if chk_out1.Checked then
-    s_io[1] := '1'
-  else
-    s_io[1] := '0';
-  if chk_out2.Checked then
-    s_io[2] := '1'
-  else
-    s_io[2] := '0';
-  if chk_out3.Checked then
-    s_io[3] := '1'
-  else
-    s_io[3] := '0';
-  if chk_out4.Checked then
-    s_io[4] := '1'
-  else
-    s_io[4] := '0';
-  if chk_out5.Checked then
-    s_io[5] := '1'
-  else
-    s_io[5] := '0';
-  if chk_out6.Checked then
-    s_io[6] := '1'
-  else
-    s_io[6] := '0';
-  if chk_out7.Checked then
-    s_io[7] := '1'
-  else
-    s_io[7] := '0';
-  if chk_out8.Checked then
-    s_io[8] := '1'
-  else
-    s_io[8] := '0';
-  command_stack.Add('I11' + s_io);
+
+  if (cb_IOExtension.ItemIndex = 1)then
+  begin
+     io_count := 16;
+
+     chk[9] := chk_out9;
+     chk[10] := chk_out10;
+     chk[11] := chk_out11;
+     chk[12] := chk_out12;
+     chk[13] := chk_out13;
+     chk[14] := chk_out14;
+     chk[15] := chk_out15;
+     chk[16] := chk_out16;
+
+    s_io := '0000000000000000';
+  end;
+
+
+  //
+
+
+  for i := 1 to io_count do
+  begin
+    if chk[i].Checked then
+      s_io[i] := '1'
+    else
+      s_io[i] := '0';
+  end;
+
+  command_stack.Add('I'+ intToStr(length(s_io)+3)+ s_io);
   send_command();
 end;
 
@@ -1166,6 +1271,10 @@ begin
  Tab_TTYS.Caption:= 'TTYS Port '+port2 ;
  case send_method.ItemIndex of
  0:begin
+     if LTCP_client1.Connect(EditIP.Text, StrToInt(port1)) then
+     begin
+       FIsserer := False;
+     end;
 
      if FNet1.Connect(EditIP.Text, StrToInt(port2)) then
      begin
@@ -1173,10 +1282,6 @@ begin
        connectTTY;
      end;
 
-     if FNet.Connect(EditIP.Text, StrToInt(port1)) then
-     begin
-       FIsserer := False;
-     end;
    end;
  1:serialConnect;
  end;
@@ -1197,18 +1302,17 @@ begin
   command_stack.Clear;
   command_stack_bs.Clear;
   // if FNet.Connected then get_ip();
-  mDelay(100);
-  if FNet.Connected then get_brdversion();
+  if LTCP_client1.Connected then get_brdversion();
 end;
 
 procedure TFormMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction := caFree;
 
-  if FNet.Connected then
+  if LTCP_client1.Connected then
   begin
     CloseAction := caNone; // make sure we quit gracefuly
-    FNet.Disconnect; // call disconnect (soft)
+    LTCP_client1.Disconnect; // call disconnect (soft)
     FNet1.Disconnect;
     serialDisconnect;
     TimerQuit.Enabled := True; // if time runs out, quit ungracefully
@@ -1229,42 +1333,20 @@ end;
 procedure TFormMain.LTCPComponentError(const msg: string; aSocket: TLSocket);
 begin
   log_common(msg+' Port '+port1);
-  MemoText.SelStart := Length(MemoText.Lines.Text);
+  MemoTerminal.SelStart := Length(MemoTerminal.Lines.Text);
 end;
 
 procedure TFormMain.LTCPComponentAccept(aSocket: TLSocket);
 begin
   log_common('Connection accepted');
-
-  //MemoText.SelStart := Length(MemoText.Lines.Text);
 end;
 
-// Empfangen über Communication board
-procedure TFormMain.LTCPComponentReceive(aSocket: TLSocket);
-var
-  s: string;
-begin
-  if aSocket.GetMessage(s) > 0 then
-  begin
-    request_cb := 0;
-    filter_msg(s);
-    //MemoText.SelStart := Length(MemoText.Lines.Text);
-    // Wenn ein Response kommt, kucken ob weitere befehle anliegen und abarbeiten
-    if (command_stack.Count > 0) then send_command;
-    //if FNet is TLUdp then begin // echo to sender if UDP
-    //  if FIsserer then
-    //    FNet.SendMessage(s);
-    //end else if FIsserer then // echo to all if TCP
 
-    //if FIsserer then
-    //  SendToAll(s);
-  end;
-end;
 
 procedure TFormMain.LTcpComponentDisconnect(aSocket: TLSocket);
 begin
   log_common('Connection disconnected: Port' + port1);
-  MemoText.SelStart := Length(MemoText.Lines.Text);
+  MemoTerminal.SelStart := Length(MemoTerminal.Lines.Text);
   Timer_poll.Enabled:= false;
   EditPort.Color := clNone;
   EditPort.Enabled := true;
@@ -1290,7 +1372,7 @@ procedure TFormMain.SendButtonClick(Sender: TObject);
 begin
   if Length(EditSend.Text) > 0 then
   begin
-      FNet.SendMessage(EditSend.Text);
+      LTCP_client1.SendMessage(EditSend.Text);
   end;
 end;
 
@@ -1298,7 +1380,7 @@ procedure TFormMain.DiconnectButtonClick(Sender: TObject);
 begin
  case send_method.ItemIndex of
  0:begin
-     FNet.Disconnect;
+     LTCP_client1.Disconnect;
      FNet1.Disconnect;
      log_common('TCP connection Disconnected');
    end;
@@ -1382,27 +1464,29 @@ begin
   Close;
 end;
 
+{
 procedure TFormMain.SendToAll(const aMsg: string);
 var
   n: integer;
 begin
-  if FNet is TLUdp then
+  if LTCP_client1 is TLUdp then
   begin // UDP, use broadcast
-    n := TLUdp(FNet).SendMessage(aMsg, LADDR_BR);
+    n := TLUdp(LTCP_client1).SendMessage(aMsg, LADDR_BR);
     if n < Length(aMsg) then
       log_terminal('Error on send [' + IntToStr(n) + ']');
   end
   else
   begin // TCP
-    FNet.IterReset; // start at serer socket
-    while FNet.IterNext do
+    LTCP_client1.IterReset; // start at serer socket
+    while LTCP_client1.IterNext do
     begin // skip serer socket, go to clients only
-      n := FNet.SendMessage(aMsg, FNet.Iterator);
+      n := LTCP_client1.SendMessage(aMsg, LTCP_client1.Iterator);
       if n < Length(aMsg) then
         log_terminal('Error on send [' + IntToStr(n) + ']');
     end;
   end;
 end;
+}
 
 function TFormMain.Ini_Read(section: string; key: string): string;
 var
@@ -1508,7 +1592,7 @@ begin
   softflow := false;
   hardflow := false;
   ser.Connect(portnr);
-  //ShowMessage('Device: ' + ser.Device + '   Status: ' + ser.LastErrorDesc +' '+Inttostr(ser.LastError));
+  // ShowMessage('Device: ' + ser.Device + '   Status: ' + ser.LastErrorDesc +' '+Inttostr(ser.LastError));
   sleep(1000);
   ser.Config(baud, bits, parity, stop, softflow, hardflow);
 
@@ -1545,14 +1629,14 @@ begin
   begin
     if ser.LastError <> 0 then
     begin
-      memoText.Lines.Add(IntToStr(ser.LastError));
+      MemoTerminal.Lines.Add(IntToStr(ser.LastError));
     end else
     begin
       signal := ser.RecvPacket(Timeout);
 
-      //MemoText.Lines.add(signal);
+      //MemoTerminal.Lines.add(signal);
       request_cb := 0;
-      //MemoText.Lines.add(get_HexStr(signal));
+      //MemoTerminal.Lines.add(get_HexStr(signal));
       //filter_bs(signal);
       //bs_string := get_escape(copy(aMsg, 4, length(aMsg)-3));
       signal := get_escape(signal);
@@ -1598,7 +1682,7 @@ begin
 
   repeat
     i1 := i1 + 1;
-    sleep(100);
+    // sleep(100);
     // 100 mal probieren
     if i1 > 100 then
     begin

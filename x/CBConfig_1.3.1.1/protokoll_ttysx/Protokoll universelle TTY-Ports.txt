@@ -1,0 +1,51 @@
+Nutzung der "universellen seriellen Ports":
+
+Nach dem Öffnen der TCP-Verbindung wird an das SDLCB ein Konfigurationsheader im JSON-Format gesendet.
+Dieser muss allerdings *OHNE* Zeilenumbrüche gesendet. Der Header kann die folgenden Parameter enthalten:
+
+{
+  "Speed": <baudrate>,
+  "DataBits": <Datenbits: 5,6,7 oder 8>,
+  "StopBits": <Stopbits: 1 oder 2>,
+  "Parity": <Parität: "NONE", "EVEN" oder "ODD">,
+  "FlowControl": <Flusskontrolle: "NONE", "RTS" oder "RTSDTR">,
+  "HalfDuplex": <Halbtuplex: true oder false>
+}
+
+Der Header wird schließlich durch einen Zeilenumbruch (\n) abgeschlossen.
+Alle Parameter sind optional. Der Header "{}\n" wäre also gültig!
+Unbekannte Parameternamen werden ignoriert.
+Fehlende Parameter werden durch die folgenden Standartwerte ersetzt:
+{
+  "Speed": 9600,
+  "DataBits": 8,
+  "StopBits": 1,
+  "Parity": "NONE",
+  "FlowControl": "NONE",
+  "HalfDuplex": false
+}
+
+Beispiele für gültige Header:
+1. Leerer Header
+'{}\n'
+2. Header mit nur einem Parameter
+'{"Speed":115200}\n'
+3. Header mit unbekannten Parameter
+'{"Unbekannt": "Was bin ich?"}\n'
+
+
+Beispiele für ungültige Header:
+1. enthält Zeilenumbrüche:
+'{\n  "Speed": 9600,\n  "DataBits": 8,\n  "StopBits": 1,\n  "Parity": "NONE",\n  "FlowControl": "NONE",\n  "HalfDuplex": false\n}\n'
+
+2. enthält ungültige Parameterwerte
+'{"Speed": "Hallo"}\n'
+
+3. Zeilenumbruch nach dem JSON-Header fehlt:
+'{"Speed": 115200}'
+
+Nach dem Senden des Parameters können 2 Fälle auftreten:
+1. Die Verbindung bleibt bestehen:
+  In diesem Fall wurde der Header akzeptiert. Das SDLCB tunnelt nun alle Daten von und zur seriellen Schnittstelle
+2. Die Verbindung wird beendet:
+  Der Header ist ungültig.
