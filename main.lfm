@@ -1177,7 +1177,7 @@ object FormMain: TFormMain
         ParentColor = False
       end
       object Chb_ttysend: TCheckBox
-        Left = 312
+        Left = 320
         Height = 19
         Top = 62
         Width = 106

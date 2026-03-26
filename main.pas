@@ -805,7 +805,6 @@ begin
 
   if (command_stack_bs.Count = 0) then // vorrangig den Stack abarbeiten, erst dann Pollen
       begin
-        //s := GetBS500FV100SendeString((current_BsAdr -1),StrToInt(Edit_box.Text),bsGetState); // Langer Poll
         s := GetBS500FV100SendeString(rg_BsAdr.ItemIndex,StrToInt(Edit_box.Text),bsGetState); // Langer Poll
         command_stack_bs.Add(s); // hier wird der Pollbefehl reingeschrieben
         //log_terminal('Adr '+ IntToStr(current_BsAdr));
