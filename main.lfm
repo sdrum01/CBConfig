@@ -4,7 +4,6 @@ object FormMain: TFormMain
   Top = 118
   Width = 820
   ActiveControl = EditPort
-  BorderStyle = bsSingle
   Caption = 'cb config tool'
   ClientHeight = 783
   ClientWidth = 820
@@ -152,6 +151,7 @@ object FormMain: TFormMain
     Height = 224
     Top = 552
     Width = 808
+    Anchors = [akTop, akLeft, akRight, akBottom]
     BevelInner = bvRaised
     BevelOuter = bvLowered
     ClientHeight = 224
@@ -171,8 +171,7 @@ object FormMain: TFormMain
       Height = 168
       Top = 40
       Width = 792
-      Anchors = [akTop, akLeft, akRight]
-      OnChange = MemoTerminalChange
+      Anchors = [akTop, akLeft, akRight, akBottom]
       ReadOnly = True
       ScrollBars = ssAutoVertical
       TabOrder = 1
@@ -193,6 +192,7 @@ object FormMain: TFormMain
       Height = 25
       Top = 9
       Width = 72
+      Anchors = [akTop, akRight]
       Caption = 'log pause'
       OnClick = Button_PollClick
       TabOrder = 3
@@ -202,6 +202,7 @@ object FormMain: TFormMain
       Height = 25
       Top = 9
       Width = 64
+      Anchors = [akTop, akRight]
       Caption = 'save'
       OnClick = B_save_logClick
       TabOrder = 4
@@ -222,6 +223,7 @@ object FormMain: TFormMain
     Top = 40
     Width = 808
     ActivePage = Tab_TTYS
+    Anchors = [akTop, akLeft, akRight]
     ParentFont = False
     TabIndex = 2
     TabOrder = 7
@@ -1103,10 +1105,10 @@ object FormMain: TFormMain
       ClientHeight = 316
       ClientWidth = 800
       object Combo_baudTTYS: TComboBox
-        Left = 20
+        Left = 96
         Height = 23
         Top = 24
-        Width = 91
+        Width = 88
         ItemHeight = 15
         ItemIndex = 5
         Items.Strings = (
@@ -1126,24 +1128,24 @@ object FormMain: TFormMain
         Text = '9600'
       end
       object Edit_TTYS_sendmsg: TEdit
-        Left = 20
+        Left = 0
         Height = 23
         Top = 64
-        Width = 91
+        Width = 448
         TabOrder = 1
         Text = 'Send String'
       end
-      object Button2: TButton
-        Left = 222
+      object B_send: TButton
+        Left = 480
         Height = 25
         Top = 64
         Width = 77
         Caption = 'send'
-        OnClick = Button2Click
+        OnClick = B_sendClick
         TabOrder = 2
       end
       object Label15: TLabel
-        Left = 20
+        Left = 96
         Height = 15
         Top = 8
         Width = 47
@@ -1151,17 +1153,17 @@ object FormMain: TFormMain
         ParentColor = False
       end
       object Edit_TTYS_receivemsg: TEdit
-        Left = 120
+        Left = 0
         Height = 23
-        Top = 64
+        Top = 104
         Width = 91
         Color = clNone
         Font.Color = clGreen
         ParentFont = False
         TabOrder = 3
       end
-      object Label17: TLabel
-        Left = 20
+      object L_sendString: TLabel
+        Left = 0
         Height = 15
         Top = 48
         Width = 26
@@ -1169,33 +1171,33 @@ object FormMain: TFormMain
         ParentColor = False
       end
       object Label18: TLabel
-        Left = 120
+        Left = 0
         Height = 15
-        Top = 48
+        Top = 88
         Width = 40
         Caption = 'Receive'
         ParentColor = False
       end
       object Chb_ttysend: TCheckBox
-        Left = 320
+        Left = 480
         Height = 19
-        Top = 62
-        Width = 106
-        Caption = 'permanent send'
+        Top = 88
+        Width = 78
+        Caption = 'permanent'
         OnChange = Chb_ttysendChange
         TabOrder = 4
       end
       object b_connect_ttySx: TButton
-        Left = 224
+        Left = 480
         Height = 25
-        Top = 22
+        Top = 24
         Width = 75
         Caption = 'connect'
         OnClick = b_connect_ttySxClick
         TabOrder = 5
       end
       object EditPort2: TEdit
-        Left = 120
+        Left = 0
         Height = 23
         Top = 24
         Width = 91
@@ -1203,7 +1205,7 @@ object FormMain: TFormMain
         Text = '5004'
       end
       object Label16: TLabel
-        Left = 120
+        Left = 0
         Height = 15
         Top = 8
         Width = 44
@@ -1211,13 +1213,154 @@ object FormMain: TFormMain
         ParentColor = False
       end
       object b_disconnect_ttysx: TButton
-        Left = 320
+        Left = 568
         Height = 25
         Top = 24
         Width = 75
         Caption = 'diconnect'
         OnClick = b_disconnect_ttysxClick
         TabOrder = 7
+      end
+      object Combo_parity: TComboBox
+        Left = 192
+        Height = 23
+        Top = 24
+        Width = 76
+        ItemHeight = 15
+        ItemIndex = 0
+        Items.Strings = (
+          'NONE'
+          'EVEN'
+          'ODD'
+        )
+        TabOrder = 8
+        Text = 'NONE'
+      end
+      object Label20: TLabel
+        Left = 192
+        Height = 15
+        Top = 8
+        Width = 30
+        Caption = 'Parity'
+        ParentColor = False
+      end
+      object Combo_DataBits: TComboBox
+        Left = 272
+        Height = 23
+        Top = 24
+        Width = 48
+        ItemHeight = 15
+        ItemIndex = 0
+        Items.Strings = (
+          '8'
+          '7'
+          '6'
+          '5'
+        )
+        TabOrder = 9
+        Text = '8'
+      end
+      object Label21: TLabel
+        Left = 272
+        Height = 15
+        Top = 8
+        Width = 43
+        Caption = 'Databits'
+        ParentColor = False
+      end
+      object Combo_FlowControl: TComboBox
+        Left = 384
+        Height = 23
+        Top = 24
+        Width = 64
+        ItemHeight = 15
+        ItemIndex = 0
+        Items.Strings = (
+          'NONE'
+          'RTS'
+          'RTSDTR'
+        )
+        TabOrder = 10
+        Text = 'NONE'
+      end
+      object Label22: TLabel
+        Left = 383
+        Height = 15
+        Top = 8
+        Width = 65
+        Caption = 'FlowControl'
+        ParentColor = False
+      end
+      object Combo_StopBits: TComboBox
+        Left = 328
+        Height = 23
+        Top = 24
+        Width = 49
+        ItemHeight = 15
+        ItemIndex = 0
+        Items.Strings = (
+          '1'
+          '2'
+        )
+        TabOrder = 11
+        Text = '1'
+      end
+      object Label23: TLabel
+        Left = 328
+        Height = 15
+        Top = 8
+        Width = 43
+        Caption = 'Stopbits'
+        ParentColor = False
+      end
+      object Memo_TTYReceiveMessage: TMemo
+        Left = 0
+        Height = 184
+        Top = 136
+        Width = 800
+        Anchors = [akLeft, akRight, akBottom]
+        ScrollBars = ssAutoVertical
+        TabOrder = 12
+      end
+      object RG_messageType: TRadioGroup
+        Left = 568
+        Height = 64
+        Top = 59
+        Width = 185
+        AutoFill = True
+        Caption = 'RG_messageType'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 44
+        ClientWidth = 181
+        ItemIndex = 0
+        Items.Strings = (
+          'String'
+          'Binary (P2000)'
+        )
+        OnSelectionChanged = RG_messageTypeSelectionChanged
+        TabOrder = 13
+      end
+      object CB_CrLf: TCheckBox
+        Left = 480
+        Height = 19
+        Top = 108
+        Width = 62
+        Caption = 'LineEnd'
+        TabOrder = 14
+      end
+      object L_sent: TLabel
+        Left = 96
+        Height = 15
+        Top = 88
+        Width = 33
+        Caption = 'L_sent'
+        ParentColor = False
       end
     end
   end
@@ -1282,6 +1425,7 @@ object FormMain: TFormMain
     Height = 152
     Top = 392
     Width = 803
+    Anchors = [akTop, akLeft, akRight]
     OnChange = MemoLogCommonChange
     ScrollBars = ssAutoVertical
     TabOrder = 10
@@ -1347,7 +1491,7 @@ object FormMain: TFormMain
     OnConnect = LTCP_client2Connect
     Timeout = 0
     ReuseAddress = False
-    Left = 280
+    Left = 344
     Top = 432
   end
   object Timer_ttysend: TTimer
@@ -1355,6 +1499,6 @@ object FormMain: TFormMain
     Interval = 300
     OnTimer = Timer_ttysendTimer
     Left = 16
-    Top = 216
+    Top = 352
   end
 end

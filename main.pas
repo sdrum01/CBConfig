@@ -20,7 +20,7 @@ type
     b_disconnect_ttysx: TButton;
     b_connect_ttySx: TButton;
     b_memoTerminal_clear: TButton;
-    Button2: TButton;
+    B_send: TButton;
     b_webconfig: TButton;
     B_save_log: TButton;
     Button_lock: TButton;
@@ -34,6 +34,7 @@ type
     ButtonDiconnect: TButton;
     ButtonConnect: TButton;
     Chb_ttysend: TCheckBox;
+    CB_CrLf: TCheckBox;
     Chk_in10: TCheckBox;
     Chk_in11: TCheckBox;
     Chk_in12: TCheckBox;
@@ -68,6 +69,10 @@ type
     chk_out8: TCheckBox;
     chk_in1: TCheckBox;
     Cb_IOextension: TComboBox;
+    Combo_StopBits: TComboBox;
+    Combo_FlowControl: TComboBox;
+    Combo_DataBits: TComboBox;
+    Combo_parity: TComboBox;
     ComboBox_comport: TComboBox;
     Combo_baudTTYS: TComboBox;
     Edit_TTYS_receivemsg: TEdit;
@@ -106,9 +111,14 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
-    Label17: TLabel;
+    L_sendString: TLabel;
     Label18: TLabel;
     Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    L_sent: TLabel;
     l_errorcount: TLabel;
     LabelHostName1: TLabel;
     LTCP_client1 : TLTCPComponent;
@@ -128,6 +138,7 @@ type
     LabelPort: TLabel;
     LabelHostName: TLabel;
     MainMenu1: TMainMenu;
+    Memo_TTYReceiveMessage: TMemo;
     MemoLogCommon: TMemo;
     MemoTerminal: TMemo;
     MenuItemExit: TMenuItem;
@@ -142,6 +153,7 @@ type
     Panel_bsNoAnswer: TPanel;
     Panel_terminal: TPanel;
     ProgressBar1: TProgressBar;
+    RG_messageType: TRadioGroup;
     rg_BsAdr: TRadioGroup;
     send_method: TRadioGroup;
     StringGrid1: TStringGrid;
@@ -160,7 +172,7 @@ type
     procedure Cb_IOextensionChange(Sender: TObject);
     procedure Chb_ttysendChange(Sender: TObject);
     procedure connectTTY;
-    procedure Button2Click(Sender: TObject);
+    procedure B_sendClick(Sender: TObject);
 
     procedure Button_lockClick(Sender: TObject);
     procedure Button_PollClick(Sender: TObject);
@@ -180,11 +192,12 @@ type
     procedure LTCP_client2Disconnect(aSocket: TLSocket);
     procedure LTCP_client2Error(const msg: string; aSocket: TLSocket);
     procedure LTCP_client2Receive(aSocket: TLSocket);
-    procedure MemoTerminalChange(Sender: TObject);
+
     procedure MemoLogCommonChange(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure Panel_bsNoAnswerClick(Sender: TObject);
     procedure rg_BsAdrClick(Sender: TObject);
+    procedure RG_messageTypeSelectionChanged(Sender: TObject);
     procedure send_command(log:boolean = true);
     procedure get_ip();
     procedure get_brdversion();
@@ -239,6 +252,7 @@ type
     procedure serialTransmit(s:string);
     procedure serialReceive;
     procedure Timer_ttysendTimer(Sender: TObject);
+    procedure sendTTY(msg:string);
 
 
   private
@@ -247,13 +261,14 @@ type
     FIsserer, b_iswritten, terminal_log, connected_com : boolean;
     command_stack,command_stack1, command_stack_bs: TStringList;
     temp_string, Ini_File, s_last_number, s_mac_vendor, brd_version, port1, port2 : string;
+    line_end : string;
     arr_boxes : array[0..499]of boolean;
     request_cb, request_bs, current_box , ActiveBox, bs_errorcounter, act_linenr: integer;
 
 
 
   const FORMHEIGHT = 800;
-  VERSION = '1.4.1.0';
+  VERSION = '1.5.1.0';
   CurrentOS = {$I %FPCTARGETOS };
 
     // procedure SendToAll(const aMsg: string);
@@ -350,6 +365,7 @@ begin
   os := CurrentOS;
   FormMain.Caption:= 'cb config tool ('+os+') ' + VERSION;
 
+  line_end := #13#10;
 
 
   if(os = 'Linux')then
@@ -584,7 +600,9 @@ procedure TFormMain.LTCP_client2Disconnect(aSocket: TLSocket);
 begin
   log_terminal('Connection disconnected: Port' + port2);
   EditPort2.Color := clNone;
-  //EditPort2.Enabled := true;
+  Chb_ttysend.Checked:= false;
+  Edit_TTYS_receivemsg.Text := '';
+  Memo_TTYReceiveMessage.Clear;
 end;
 
 procedure TFormMain.LTCP_client2Error(const msg: string; aSocket: TLSocket);
@@ -593,16 +611,51 @@ begin
 end;
 
 procedure TFormMain.LTCP_client2Receive(aSocket: TLSocket);
-var s: string;
+var
+  s: string;
+  timeout, len, i, received: integer;
+  signal: string;
+  buf: array[0..255] of byte;
+  hexOut, asciiOut: string;
 begin
-  if aSocket.GetMessage(s) > 0 then
-  begin
-    request_cb := 0;
-    Edit_TTYS_receivemsg.Text:= s;
-    log_terminal('received on Port '+port2+':'+s);
+  case RG_messageType.ItemIndex of
+    0: // String-Modus
+      begin
+        if aSocket.GetMessage(s) > 0 then
+        begin
+          request_cb := 0;
+          //signal := serv.RecvString(Timeout);
+          Memo_TTYReceiveMessage.Lines.Add(s);
+          log_terminal('received on Port '+port2+':'+s);
+        end;
+      end;
+
+    1: // Binary-Modus
+      begin
+        received := aSocket.Get(buf, SizeOf(buf));
+        if received > 0 then
+        begin
+          hexOut := '';
+          asciiOut := '';
+
+          for i := 0 to received - 1 do
+          begin
+            hexOut := hexOut + IntToHex(buf[i], 2) + ' ';
+
+            if (buf[i] >= 32) and (buf[i] <= 126) then
+              asciiOut := asciiOut + Chr(buf[i])
+            else
+              asciiOut := asciiOut + '.';
+          end;
+
+          Memo_TTYReceiveMessage.Lines.Add(Trim(hexOut) + '   |   ' + asciiOut);
+
+        end;
+      end;
   end;
 end;
 
+{
 procedure TFormMain.MemoTerminalChange(Sender: TObject);
 var
   grenze : Integer;
@@ -612,6 +665,7 @@ begin
   if MemoTerminal.Lines.Count > grenze then
     MemoTerminal.Lines.Delete(0);
 end;
+}
 
 procedure TFormMain.MemoLogCommonChange(Sender: TObject);
 var
@@ -642,6 +696,19 @@ begin
   //current_adr := rg_BsAdr.ItemIndex + 1;
 end;
 
+procedure TFormMain.RG_messageTypeSelectionChanged(Sender: TObject);
+begin
+  case RG_messageType.ItemIndex of
+    0 : L_sendString.Caption:= 'Send String';
+    1 :
+      begin
+        L_sendString.Caption:= 'Send Binary (splitted by ;)';
+        Edit_TTYS_sendmsg.Text:= '0x02;0x31;S;I;0x03;SUM';
+        CB_CrLf.Checked:=false;
+      end;
+  end;
+end;
+
 procedure TFormMain.b_set_defaultClick(Sender: TObject);
 begin
   setdefault;
@@ -665,9 +732,15 @@ begin
 end;
 
 procedure TFormMain.log_terminal(s:string);
+const MAX_LINES = 10;
 begin
   //if (Panel_terminal.Visible and terminal_log) then MemoTerminal.Append(TimeToStr(Now)+ #9 + s);
   if (terminal_log) then MemoTerminal.Append(FormatDateTime('hh:mm:ss z',now)+ #9 + s);
+  // alte Zeilen löschen
+  while MemoTerminal.Lines.Count > MAX_LINES do
+    MemoTerminal.Lines.Delete(0);
+  // ans Ende springen
+  MemoTerminal.SelStart := Length(MemoTerminal.Text);
 end;
 
 procedure TFormMain.log_common(s:string);
@@ -795,7 +868,7 @@ end;
 procedure TFormMain.Button_PollClick(Sender: TObject);
 
 begin
-  //timer_poll.Enabled := NOT timer_poll.Enabled;
+  // timer_poll.Enabled := NOT timer_poll.Enabled;
   // terminal_log := NOT terminal_log;
 end;
 
@@ -1078,6 +1151,7 @@ begin
     l_sendcount.Caption := IntToStr(request_bs);
     //l_sendcount.Caption:= IntToStr(command_stack_bs.Count);
     ProgressBar1.Position:=request_bs;
+    // Weitergeben des bs_string an das Stringgrid
     get_boxinfo(bs_string);
 end;
 
@@ -1098,6 +1172,7 @@ begin
       for i1 := 0 to 62 do
       begin
         b := $80;
+
         box_byte := byte(aMsg[i1 + 4]); // Adressierung der Bytes im String: ab Byte 4 gehts los
         for i := 0 to 7 do
         begin
@@ -1677,20 +1752,24 @@ end;
 
 // Testfunktion
 procedure TFormMain.connectTTY;
-var ttys_header , msg : string;
+var ttys_header, msg, baudrate, parity, databits, stopbits, flowcontrol : string;
 i1 : integer;
 conn_abort:boolean;
 begin
  conn_abort := false;
+ baudrate:= Combo_baudTTYS.Text;
+ parity :=  Combo_parity.Text;
+ databits := Combo_DataBits.Text;
+ stopbits := Combo_StopBits.Text;
+ flowcontrol := Combo_FlowControl.Text;
  i1 := 0;
- //ttys_header := '{"Speed":9600,"DataBits":8,"StopBits":1,"Parity":"NONE","FlowControl": "NONE","HalfDuplex": false}'+ #10;
- ttys_header := '{"Speed":9600,"FlowControl": "NONE","HalfDuplex": false,"Parity":"NONE"}'+ #10;
- //ttys_header := '{"Speed" : '+ Combo_baudTTYS.Text +'}'+ #13#10;
-  msg := ttys_header;
+ //ttys_header := '{"Speed":'+baudrate+',"FlowControl": "NONE","HalfDuplex": false,"Parity":"NONE"}'+ #10;
+ ttys_header := '{"Speed":'+baudrate+', "DataBits":'+databits+', "StopBits":'+stopbits+', "Parity":"'+parity+'", "FlowControl":"'+flowcontrol+'","HalfDuplex": false}'+ #10;
+
+ msg := ttys_header;
 
   repeat
     i1 := i1 + 1;
-    // sleep(100);
     // 100 mal probieren
     if i1 > 100 then
     begin
@@ -1698,6 +1777,7 @@ begin
      log_common('TTY Connection not ready' + #9 + ' trials: ' + intToStr(i1));
      conn_abort := true;
     end;
+    mDelay(100);
     Application.ProcessMessages;
   until LTCP_client2.Connected or conn_abort = true;
 
@@ -1712,12 +1792,102 @@ begin
   end;
 end;
 
-procedure TFormMain.Button2Click(Sender: TObject);
+procedure TFormMain.B_sendClick(Sender: TObject);
 begin
  Edit_TTYS_receivemsg.Text:= '';
- LTCP_client2.SendMessage(Edit_TTYS_sendmsg.Text);
+ sendTTY(Edit_TTYS_sendmsg.Text);
 end;
 
+procedure TFormMain.sendTTY(msg:string);
+var
+  befehl, part, hexOut, le: string;
+  parts: TStringArray;
+  buffer: array of byte;
+  i, value: integer;
+  checksum: byte;
+begin
+  befehl := msg;
+  le := '';
+  if(CB_CrLf.Checked)then le := line_end;
+  case RG_messageType.ItemIndex of
+    0:
+      begin
+        LTCP_client2.SendMessage(Edit_TTYS_sendmsg.Text+le);
+      end;
+    1:
+      begin
+        parts := befehl.Split(';');
+
+        SetLength(buffer, Length(parts));
+        checksum := 0;
+        hexOut := '';
+
+        for i := 0 to High(parts) do
+        begin
+          part := Trim(parts[i]);
+
+          if UpperCase(part) = 'SUM' then
+          begin
+            buffer[i] := 0;
+            Continue;
+          end;
+
+          // HEX-Wert
+          if Pos('0x', LowerCase(part)) = 1 then
+          begin
+            Delete(part, 1, 2);
+            value := StrToInt('$' + part);
+            buffer[i] := Byte(value);
+          end
+          else
+          begin
+            // ASCII-Zeichen
+            if Length(part) = 1 then
+              buffer[i] := Ord(part[1])
+            else
+            begin
+              ShowMessage('Ungültiger Wert: ' + part);
+              Exit;
+            end;
+          end;
+
+          // Checksumme berechnen
+          // alternativ XOR:
+          // checksum := checksum xor buffer[i];
+          // XOR nur wenn NICHT STX/ETX
+          if (buffer[i] <> $02) and (buffer[i] <> $03) then
+          checksum := checksum xor buffer[i];
+
+        end;
+        // Bit 7 setzen
+        checksum := checksum or $80;
+
+        // SUM einsetzen
+        for i := 0 to High(parts) do
+        begin
+          if UpperCase(Trim(parts[i])) = 'SUM' then
+          begin
+            buffer[i] := checksum;
+            Break;
+          end;
+        end;
+
+
+        // HEX-Ausgabe erzeugen
+        for i := 0 to High(buffer) do
+        begin
+          hexOut := hexOut + IntToHex(buffer[i], 2) + ' ';
+        end;
+
+        L_sent.Caption := Trim(hexOut);
+        // Senden
+        //serv.SendBuffer(@buffer[0], Length(buffer));
+        LTCP_client2.Send(buffer[0], Length(buffer));
+      end;
+  end;
+
+ //receiveSerial;
+end;
 
 initialization
   {$I main.lrs}

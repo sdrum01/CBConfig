@@ -1,0 +1,1 @@
+als Namen darfst du nur Buchstaben, Zahlen und '-' (Minus) '.' (Punk) sowie '_' (Unterstrich) verwenden. Das erste Zeichen muss ein Buchstabe oder eine Zahl sein.

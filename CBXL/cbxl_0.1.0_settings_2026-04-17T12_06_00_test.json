@@ -1,0 +1,165 @@
+{
+  "modules": {
+    "mupp": {
+      "units": {
+        "ttyS5": {
+          "busSpeed": 19200,
+          "deviceSettings": [
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": true,
+              "uartPortCount": 4
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 4
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            },
+            {
+              "ioInputCount": 0,
+              "ioOutputCount": 0,
+              "enableDevice": false,
+              "uartPortCount": 0
+            }
+          ],
+          "uartDeviceName": "ttyS5"
+        }
+      }
+    },
+    "uart_tcp_bridge": {
+      "units": {
+        "MUPP1-A": {
+          "uartDeviceName": "MUPP-ttyS5@0 - A",
+          "listenPort": 5015,
+          "uartSettings": {
+            "dataBits": "Eight",
+            "parity": "None",
+            "baudRate": 9600,
+            "duplexMode": "FullDuplex",
+            "stopBits": "One",
+            "flowControl": "None"
+          }
+        },
+        "ttyS4": {
+          "uartDeviceName": "ttyS4",
+          "listenPort": 5014,
+          "uartSettings": {
+            "dataBits": "Eight",
+            "parity": "None",
+            "baudRate": 9600,
+            "duplexMode": "FullDuplex",
+            "stopBits": "One",
+            "flowControl": "None"
+          }
+        }
+      }
+    },
+    "current_loop_bridge": {
+      "units": {
+        "ttyS3": {
+          "uartDeviceName": "ttyS3",
+          "baudRate": 19200,
+          "listenPort": 5001
+        }
+      }
+    },
+    "io_bs_mux": {
+      "units": {
+        "ttyS2": {
+          "numInputs": 16,
+          "uartDeviceName": "ttyS2",
+          "numOutputs": 16,
+          "gpioDeviceName": "GPIO",
+          "listenPort": 5000
+        }
+      }
+    }
+  },
+  "fwInfo": {
+    "sdk_release": "V2.137.0#8138",
+    "sdk_compiled": "2026-03-12T11:50:45",
+    "app_release": "0.1.0",
+    "app_compiled": "2026-04-17T07:37:27",
+    "app_name": "CBXL"
+  }
+}
