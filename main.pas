@@ -264,7 +264,7 @@ type
     line_end : string;
     arr_boxes : array[0..499]of boolean;
     request_cb, request_bs, current_box , ActiveBox, bs_errorcounter, act_linenr: integer;
-
+    rxAsciiBuffer: string;
 
 
   const FORMHEIGHT = 800;
@@ -617,6 +617,7 @@ var
   signal: string;
   buf: array[0..255] of byte;
   hexOut, asciiOut: string;
+
 begin
   case RG_messageType.ItemIndex of
     0: // String-Modus
@@ -644,11 +645,20 @@ begin
 
             if (buf[i] >= 32) and (buf[i] <= 126) then
               asciiOut := asciiOut + Chr(buf[i])
+              //rxAsciiBuffer := rxAsciiBuffer + Chr(buf[i])
+            {
+            else if buf[i] = 10 then // LF als Beispiel
+            begin
+              //Memo_TTYReceiveMessage.Lines.Add(Trim(hexOut) + '   |   ' + rxAsciiBuffer);
+              rxAsciiBuffer := '';
+            end;
+            }
             else
               asciiOut := asciiOut + '.';
           end;
 
           Memo_TTYReceiveMessage.Lines.Add(Trim(hexOut) + '   |   ' + asciiOut);
+          //Memo_TTYReceiveMessage.Lines.Add(Trim(hexOut) + '   |   ' + rxAsciiBuffer);
 
         end;
       end;
@@ -699,11 +709,16 @@ end;
 procedure TFormMain.RG_messageTypeSelectionChanged(Sender: TObject);
 begin
   case RG_messageType.ItemIndex of
-    0 : L_sendString.Caption:= 'Send String';
+    0 :
+      begin
+        L_sendString.Caption:= 'Send String';
+        Edit_TTYS_sendmsg.Text:= 'LON';
+        CB_CrLf.Checked:=true;
+      end;
     1 :
       begin
         L_sendString.Caption:= 'Send Binary (splitted by ;)';
-        Edit_TTYS_sendmsg.Text:= '0x02;0x31;S;I;0x03;SUM';
+        Edit_TTYS_sendmsg.Text:= '0x02;0x31;S;A;0x03;SUM';
         CB_CrLf.Checked:=false;
       end;
   end;
@@ -1750,7 +1765,7 @@ begin
   serialReceive;
 end;
 
-// Testfunktion
+// Testfunktion Verbindung über TTY
 procedure TFormMain.connectTTY;
 var ttys_header, msg, baudrate, parity, databits, stopbits, flowcontrol : string;
 i1 : integer;
