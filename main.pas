@@ -25,7 +25,6 @@ type
     B_save_log: TButton;
     Button_lock: TButton;
     Button_Poll: TButton;
-    Button_terminal: TButton;
     ButtonSend: TButton;
     b_close: TButton;
     b_set_default: TButton;
@@ -107,7 +106,6 @@ type
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
-    Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
@@ -146,17 +144,19 @@ type
     MenuItemHelp: TMenuItem;
     MenuItemFile: TMenuItem;
     PageControl1: TPageControl;
+    PageControlLog: TPageControl;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Panel_bsNoAnswer: TPanel;
-    Panel_terminal: TPanel;
     ProgressBar1: TProgressBar;
     RG_messageType: TRadioGroup;
     rg_BsAdr: TRadioGroup;
     send_method: TRadioGroup;
     StringGrid1: TStringGrid;
+    TabSheetLog: TTabSheet;
+    TabSheetDebug: TTabSheet;
     Tab_TTYS: TTabSheet;
     Tab_EEProm: TTabSheet;
     Tab_Boxes: TTabSheet;
@@ -176,7 +176,6 @@ type
 
     procedure Button_lockClick(Sender: TObject);
     procedure Button_PollClick(Sender: TObject);
-    procedure Button_terminalClick(Sender: TObject);
     procedure b_closeClick(Sender: TObject);
     procedure B_save_logClick(Sender: TObject);
     procedure b_set_defaultClick(Sender: TObject);
@@ -186,6 +185,7 @@ type
 
     procedure Edit_boxChange(Sender: TObject);
     procedure Edit_versionDblClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure LTCP_client1Receive(aSocket: TLSocket);
 
     procedure LTCP_client2Connect(aSocket: TLSocket);
@@ -224,6 +224,8 @@ type
     procedure SendButtonClick(Sender: TObject);
     procedure SendEditKeyPress(Sender: TObject; var Key: char);
     procedure StringGrid1Click(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
 
     procedure StringGrid1SelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
@@ -253,7 +255,7 @@ type
     procedure serialReceive;
     procedure Timer_ttysendTimer(Sender: TObject);
     procedure sendTTY(msg:string);
-
+    procedure ResizeStringGrid;
 
   private
 
@@ -361,6 +363,9 @@ begin
   command_stack1 := TStringList.Create; // Port5001
   command_stack_bs := TStringList.Create;
 
+  StringGrid1.DoubleBuffered := True;
+  //StringGrid1.Options := StringGrid1.Options + [goDoubleBuffered];
+
   PageControl1.PageIndex:= 0;
   os := CurrentOS;
   FormMain.Caption:= 'cb config tool ('+os+') ' + VERSION;
@@ -408,11 +413,26 @@ begin
     show_Terminal(false);
 
   init_StringGrid;
+  ResizeStringGrid;
+
   l_errorcount.Caption := IntToStr(bs_errorcounter);
 
 end;
 
+procedure TFormMain.ResizeStringGrid;
+var
+  ColWidth, RowHeight: Integer;
+  i: Integer;
+begin
+  ColWidth := StringGrid1.ClientWidth div StringGrid1.ColCount;
+  RowHeight := StringGrid1.ClientHeight div StringGrid1.RowCount;
 
+  for i := 0 to StringGrid1.ColCount - 1 do
+    StringGrid1.ColWidths[i] := ColWidth;
+
+  for i := 0 to StringGrid1.RowCount - 1 do
+    StringGrid1.RowHeights[i] := RowHeight;
+end;
 
 procedure TFormMain.init_StringGrid;
 var i,i1,i3 : integer;
@@ -444,15 +464,20 @@ begin
   end;
 end;
 
+{
 procedure TFormMain.selectCell(nr:integer; selected:boolean);
 var col, row : integer;
   myrect : TRect;
   col_open, col_close, mycolor : TColor;
+  s: String;
+  x, y: Integer;
 begin
   col := (nr DIV 20) MOD 25;
   row := nr MOD 20;
   col_open := $00FFFFFF;
   col_close := $0000FFFF;
+
+
   if selected then
   begin
     mycolor := col_close;
@@ -477,9 +502,39 @@ begin
   StringGrid1.Canvas.Brush.Color := mycolor;
   myrect := StringGrid1.CellRect(col,row);
   StringGrid1.Canvas.FillRect(myrect);
+
+  StringGrid1.Canvas.Pen.Color := clGray;
+  StringGrid1.Canvas.Pen.Width := 1;
+  StringGrid1.Canvas.Rectangle(myrect.Left-1,myrect.top-1,myrect.Right+1,myrect.Bottom+1);
+
+  //StringGrid1.Invalidate;
+
   //StringGrid1.Canvas.Font.Size:=8;
-  StringGrid1.Canvas.TextOut(myrect.Left+3,myrect.top,StringGrid1.Cells[col,row]);
+  //StringGrid1.Canvas.TextOut(myrect.Left+3,myrect.top,StringGrid1.Cells[col,row]);
+  s := StringGrid1.Cells[col, row];
+
+  x := myRect.Left +
+       (myRect.Right - myRect.Left - StringGrid1.Canvas.TextWidth(s)) div 2;
+
+  y := myRect.Top +
+       (myRect.Bottom - myRect.Top - StringGrid1.Canvas.TextHeight(s)) div 2;
+
+  StringGrid1.Canvas.TextOut(x, y, s);
 end;
+}
+
+procedure TFormMain.selectCell(nr: integer; selected: boolean);
+begin
+  // nur Zustand ändern
+  arr_boxes[nr] := selected;
+
+  // nur EIN redraw triggern
+  StringGrid1.InvalidateCell(
+    (nr div 20) mod 25,
+    nr mod 20
+  );
+end;
+
 
 // command über TCP rausschicken
 procedure TFormMain.send_command(log : boolean = true);
@@ -565,6 +620,12 @@ end;
 procedure TFormMain.Edit_versionDblClick(Sender: TObject);
 begin
   if LTCP_client1.Connected then get_brdversion();
+end;
+
+procedure TFormMain.FormResize(Sender: TObject);
+begin
+  ResizeStringGrid;
+
 end;
 
 procedure TFormMain.LTCP_client1Receive(aSocket: TLSocket);
@@ -1494,37 +1555,19 @@ begin
  Init_StringGrid;
 end;
 
-
-
-
-procedure TFormMain.Button_terminalClick(Sender: TObject);
-begin
-  if Panel_terminal.Visible then
-  begin
-    ini_write('GUI', 'SHOW_TERMINAL', '0');
-    show_Terminal(false);
-  end
-  else
-  begin
-    ini_write('GUI', 'SHOW_TERMINAL', '1');
-    show_Terminal(true);
-  end;
-end;
-
 procedure TFormMain.show_Terminal(term_state:boolean);
 begin
   if term_state then
   begin
-    Panel_terminal.Visible := True;
-    //FormMain.Height := FormMain.Height + Panel_terminal.Height + 10;
-    FormMain.Height := FORMHEIGHT;
-
+    //Panel_terminal.Visible := True;
+    //FormMain.Height := FORMHEIGHT;
+    TabSheetDebug.Visible:= true;
   end
   else
   begin
-    Panel_terminal.Visible := False;
-    //FormMain.Height := FormMain.Height - Panel_terminal.Height - 10;
-    FormMain.Height := FORMHEIGHT - Panel_terminal.Height - 10;
+    //Panel_terminal.Visible := False;
+    //FormMain.Height := FORMHEIGHT - Panel_terminal.Height - 10;
+    TabSheetDebug.Visible:= false;
   end;
 end;
 
@@ -1539,6 +1582,41 @@ begin
   Edit_box.Text := IntToStr(current_box);
 end;
 
+procedure TFormMain.StringGrid1DrawCell(Sender: TObject;
+  aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
+var
+  nr: Integer;
+  s: string;
+  myColor: TColor;
+begin
+  nr := aCol * 20 + aRow;
+  s := StringGrid1.Cells[aCol, aRow];
+
+  // Basisfarbe
+  if arr_boxes[nr] then
+    myColor := clYellow
+  else
+    myColor := clWhite;
+
+  // aktive Zustände
+  if nr = ActiveBox then
+    //myColor := myColor xor $00005050;
+    myColor := $000000FF; // kräftiges Rot
+
+  StringGrid1.Canvas.Brush.Color := myColor;
+  StringGrid1.Canvas.FillRect(aRect);
+
+  StringGrid1.Canvas.Pen.Color := clGray;
+  StringGrid1.Canvas.Rectangle(aRect);
+
+  // zentrierter Text
+  StringGrid1.Canvas.TextOut(
+    aRect.Left + (aRect.Width div 2) - (StringGrid1.Canvas.TextWidth(s) div 2),
+    aRect.Top + (aRect.Height div 2) - (StringGrid1.Canvas.TextHeight(s) div 2),
+    s
+  );
+end;
+
 
 
 
@@ -1546,6 +1624,7 @@ procedure TFormMain.StringGrid1SelectCell(Sender: TObject; aCol, aRow: Integer;
   var CanSelect: Boolean);
 begin
   current_box := StrToInt(StringGrid1.Cells[aCol, aRow]);
+
 end;
 
 procedure TFormMain.Tab_EEPromContextPopup(Sender: TObject; MousePos: TPoint;
