@@ -270,7 +270,7 @@ type
 
 
   const FORMHEIGHT = 800;
-  VERSION = '1.5.1.0';
+  VERSION = '1.6.1.0';
   CurrentOS = {$I %FPCTARGETOS };
 
     // procedure SendToAll(const aMsg: string);
