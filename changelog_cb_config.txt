@@ -15,3 +15,11 @@ V1.3.1.1    falsche Anzeige des Fachstatus wenn BS-Timout auftaucht: alle Fächer
 23.11.2021
 V1.4.0      Sofortiges Connecten des TTYSx als Serieller Port (Ab FW 1.4 wird sonst die Verbndung abgewiesen)
             Kleiner Comport-Tester in Tab TTYx integriert
+			
+V1.5.1.0	Implementierung CB-XL
+            Test-Tab TTY überarbeitet für CB-XL (Ansteuerung von P2000 als Binär, alles Andere als String)
+			Erweiterte IO Steuerung: 16 IOs statt 8 für CB-XL
+			
+16.06.2026
+V1.6.1.0    Überarbeiten Grafikanzeige BS500 Controller (Skalierbar, ohne Flackern)
+            
